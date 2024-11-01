@@ -4,12 +4,15 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:NearMindApp"
+    xmlns:views="clr-namespace:NearMindApp.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="NearMindApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent Icon="calendar.svg" ContentTemplate="{DataTemplate views:CalendarioPage}" />
+        <ShellContent Icon="search.svg" ContentTemplate="{DataTemplate views:BuscadorPage}" />
+        <ShellContent Icon="chat.svg" ContentTemplate="{DataTemplate views:ChatPage}" />
+        <ShellContent Icon="user.svg" ContentTemplate="{DataTemplate views:PerfilPage}" />
+    </TabBar>
 
 </Shell>

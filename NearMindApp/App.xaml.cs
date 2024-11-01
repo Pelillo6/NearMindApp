@@ -1,4 +1,6 @@
-﻿namespace NearMindApp
+﻿using NearMindApp.Views;
+
+namespace NearMindApp
 {
     public partial class App : Application
     {
