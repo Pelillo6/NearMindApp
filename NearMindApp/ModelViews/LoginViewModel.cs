@@ -25,7 +25,7 @@ namespace NearMindApp.ModelViews
         private string password;
 
         [ObservableProperty]
-        private string mensaje;
+        private string mensaje = "Esperando...";
 
         public ICommand IniciarSesionCommand { get; }
 
@@ -38,7 +38,7 @@ namespace NearMindApp.ModelViews
         private async Task IniciarSesionAsync()
         {
             var resultado = await _supabaseClient.From<Usuario>()
-            .Where(u => u.Email == email && u.Password == password)
+            .Where(u => u.email == email && u.password == password)
             .Get();
             // Buscar usuario en la base de datos
             var usuario = resultado.Models.FirstOrDefault();
