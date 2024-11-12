@@ -18,6 +18,7 @@ namespace NearMindApp.Models
         [JsonPropertyName("nombre")]
         public string Nombre { get; set; }
 
+
         [Required]
         [JsonPropertyName("email")]
         public string Email { get; set; }
@@ -30,6 +31,10 @@ namespace NearMindApp.Models
 
         [JsonPropertyName("rol")]
         public string Rol { get; set; } // Puede ser "Paciente", "Psicólogo", "Admin", etc.
+
+        [Required]
+        [JsonPropertyName("password")]
+        public string Password { get; set; }
 
         public Usuario()
         {
