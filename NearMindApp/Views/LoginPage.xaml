@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:NearMindApp.ModelViews"
+             x:Class="NearMindApp.Views.LoginPage">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20" VerticalOptions="CenterAndExpand" Spacing="15">
+
+        <Entry Placeholder="Correo Electrónico"
+               Text="{Binding Email}"
+               Keyboard="Email"
+               HorizontalOptions="FillAndExpand" />
+
+        <Entry Placeholder="Contraseña"
+               Text="{Binding Password}"
+               IsPassword="True"
+               HorizontalOptions="FillAndExpand" />
+
+        <Button Text="Iniciar Sesión"
+                Command="{Binding IniciarSesionCommand}"
+                BackgroundColor="#6200EE"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="10,5" />
+
+        <!-- Mostrar mensaje de inicio de sesión -->
+        <Label Text="{Binding Mensaje}"
+               TextColor="Red"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+
+    </StackLayout>
+
+</ContentPage>
