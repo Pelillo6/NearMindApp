@@ -9,5 +9,12 @@
             Text="Estas en el buscador"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <!-- Botón para obtener los elementos de la tabla -->
+        <Button 
+            Text="Obtener Usuarios"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="OnObtenerUsuariosClicked"/>
     </VerticalStackLayout>
 </ContentPage>
