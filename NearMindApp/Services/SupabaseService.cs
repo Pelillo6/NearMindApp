@@ -85,16 +85,5 @@ namespace NearMindApp.Services
             }
         }
 
-
-        public async Task<List<Psicologo>> ObtenerPsicologosNoValidados()
-        {
-            var response = await _client.From<Psicologo>()
-                .Select("*")
-                .Filter<bool>("validado", Supabase.Postgrest.Constants.Operator.Equals, false)
-                .Get();
-
-            return response.Models;
-        }
-
     }
 }

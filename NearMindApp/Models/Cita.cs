@@ -19,18 +19,12 @@ namespace NearMindApp.Models
         public DateTime fecha { get; set; }
 
         [Required]
-        [JsonPropertyName("psicologo_id")]
-        public Guid osicologo_id { get; set; }
-
-        [JsonPropertyName("psicologo")]
-        public Psicologo psicologo { get; set; }
+        [JsonPropertyName("usuario1_id")]
+        public Guid usuario1_id { get; set; }
 
         [Required]
-        [JsonPropertyName("paciente_id")]
-        public Guid pacienteId { get; set; }
-
-        [JsonPropertyName("paciente")]
-        public Paciente paciente { get; set; }
+        [JsonPropertyName("usuario2_id")]
+        public Guid usuario2_id { get; set; }
 
         public Cita()
         {
