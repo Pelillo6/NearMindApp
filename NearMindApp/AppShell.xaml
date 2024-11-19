@@ -9,9 +9,9 @@
     Title="NearMindApp">
 
     <TabBar>
-        <ShellContent Icon="calendar.svg" ContentTemplate="{DataTemplate views:CalendarioPage}" />
-        <ShellContent Icon="search.svg" ContentTemplate="{DataTemplate views:BuscadorPage}" />
-        <ShellContent Icon="chat.svg" ContentTemplate="{DataTemplate views:ChatPage}" />
+        <ShellContent Icon="calendar.svg" ContentTemplate="{DataTemplate views:CalendarioPage}" IsVisible="{Binding IsNotAdmin}"/>
+        <ShellContent Icon="search.svg" ContentTemplate="{DataTemplate views:BuscadorPage}" IsVisible="{Binding IsNotAdmin}"/>
+        <ShellContent Icon="chat.svg" ContentTemplate="{DataTemplate views:ChatPage}" IsVisible="{Binding IsNotAdmin}"/>
         <ShellContent Icon="user.svg" ContentTemplate="{DataTemplate views:PerfilPage}" />
         <ShellContent Icon="settings.svg" ContentTemplate="{DataTemplate views:ConfiguracionPage}" IsVisible="{Binding IsAdmin}" />
     </TabBar>

@@ -6,12 +6,14 @@ namespace NearMindApp
     public partial class AppShell : Shell
     {
         public bool IsAdmin { get; set; }
+        public bool IsNotAdmin { get; set; }
         public AppShell()
         {
             InitializeComponent();
 
             var usuario = UsuarioService.Instance.UsuarioActual;
-            IsAdmin = usuario.Rol == "Admin";
+            IsAdmin = usuario.rol == "Admin";
+            IsNotAdmin = !IsAdmin;
             BindingContext = this;
         }
 

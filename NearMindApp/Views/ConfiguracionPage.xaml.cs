@@ -26,7 +26,7 @@ public partial class ConfiguracionPage : ContentPage
             try
             {
             List<Psicologo> psicologos = await _supabaseService.ObtenerElementosDeTabla<Psicologo>();
-            psicologos = psicologos.Where(u => u.Rol == "Psicologo").ToList();
+            psicologos = psicologos.Where(u => u.rol == "Psicologo").ToList();
             PsicologosListView.ItemsSource = psicologos.Where(u => u.validado.Equals(false)).ToList();
         }
             catch (Exception ex)
@@ -42,7 +42,7 @@ public partial class ConfiguracionPage : ContentPage
             if (psicologo != null)
             {
                 // Maneja la selección del psicólogo, por ejemplo, navegar a una página de detalles
-                Console.WriteLine($"Psicólogo seleccionado: {psicologo.Nombre}");
+                Console.WriteLine($"Psicólogo seleccionado: {psicologo.nombre}");
             }
         }
     
