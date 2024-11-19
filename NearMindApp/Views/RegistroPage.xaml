@@ -42,29 +42,6 @@
                Keyboard="Telephone"
                HorizontalOptions="FillAndExpand" />
 
-        <!-- Mostrar campo de especialidad solo si es Psicólogo -->
-        <StackLayout IsVisible="{Binding IsPsicologoSelected}">
-            <Label Text="Especialidades"
-                   HorizontalOptions="Center"
-                   VerticalOptions="CenterAndExpand" />
-
-            <!-- Aplica el HeightRequest directamente en el CollectionView -->
-            <CollectionView ItemsSource="{Binding EspecialidadesDisponibles}"
-                            SelectedItems="{Binding EspecialidadesSeleccionadas}"
-                            SelectionMode="Multiple"
-                            HeightRequest="200">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal">
-                            <!-- CheckBox para seleccionar especialidades -->
-                            <CheckBox IsChecked="{Binding IsSelected}" />
-                            <Label Text="{Binding Name}" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
-
         <!-- Botón de registro -->
         <Button Text="Registrar"
                 Command="{Binding RegistrarCommand}"

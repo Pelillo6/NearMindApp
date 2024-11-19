@@ -25,35 +25,6 @@ namespace NearMindApp.Services
             return _client;
         }
 
-        // Método de autenticación
-        public async Task<User> IniciarSesion(string email, string password)
-        {
-            try
-            {
-                var session = await _client.Auth.SignIn(email, password);
-                return session.User;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al iniciar sesión: {ex.Message}");
-                return null;
-            }
-        }
-
-        // Método para registrar un nuevo usuario
-        public async Task<User> RegistrarUsuario(string email, string password)
-        {
-            try
-            {
-                var session = await _client.Auth.SignUp(email, password);
-                return session.User;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al registrar usuario: {ex.Message}");
-                return null;
-            }
-        }
 
         // Método genérico para obtener todos los elementos de una tabla
         public async Task<List<T>> ObtenerElementosDeTabla<T>() where T : BaseModel, new()

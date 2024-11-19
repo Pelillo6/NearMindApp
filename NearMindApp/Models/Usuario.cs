@@ -32,28 +32,14 @@ namespace NearMindApp.Models
         [JsonPropertyName("password")]
         public string password { get; set; }
 
-        // Historial compartido por Psicologo y Paciente
         [JsonPropertyName("historial")]
         public List<Cita> historial { get; set; }
 
         [JsonPropertyName("rol")]
         public string rol { get; set; }
 
-        [JsonPropertyName("especialidades")]
-        public List<string> especialidades { get; set; } = new List<string>();
-
-        public List<Especialidad> GetEspecialidades()
-        {
-            return especialidades
-                .Where(e => Enum.TryParse<Especialidad>(e, out _))
-                .Select(e => Enum.Parse<Especialidad>(e))
-                .ToList();
-        }
-
-        public void SetEspecialidades(List<Especialidad> values)
-        {
-            especialidades = values.Select(e => e.ToString()).ToList();
-        }
+        [JsonPropertyName("especialidad")]
+        public string especialidad { get; set; }
 
         [JsonPropertyName("validado")]
         public bool validado { get; set; }

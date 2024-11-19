@@ -36,7 +36,7 @@ namespace NearMindApp.ModelViews
         private string rol;
 
         [ObservableProperty]
-        private List<string> roles = new List<string> { "Psicólogo", "Paciente" };
+        private List<string> roles = new List<string> { "Psicologo", "Paciente" };
 
         [ObservableProperty]
         private bool isPsicologoSelected;
@@ -86,7 +86,7 @@ namespace NearMindApp.ModelViews
 
             // Aquí se crearía el usuario en la base de datos (Supabase) según el rol
             Usuario usuario;
-            if (rol == "Psicólogo")
+            if (rol == "Psicologo")
             {
                 var psicologo = new Usuario
                 {
@@ -95,7 +95,6 @@ namespace NearMindApp.ModelViews
                     password = password,
                     telefono = telefono,
                     rol = rol,
-                    especialidades = especialidadesSeleccionadas.Select(e => e.Name).ToList(),
                     validado = false
                 };
                 // Llamar a Supabase para registrar al psicólogo

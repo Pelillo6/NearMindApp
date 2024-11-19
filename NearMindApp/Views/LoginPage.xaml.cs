@@ -1,5 +1,6 @@
 using NearMindApp.Services;
 using NearMindApp.Models;
+using Supabase.Gotrue;
 
 namespace NearMindApp.Views;
 
@@ -32,10 +33,15 @@ public partial class LoginPage : ContentPage
 
         try
         {
-            // Llamada a Supabase para autenticar al usuario
+            /* Llamada a Supabase para autenticar al usuario*/
             List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
+
+            Console.WriteLine(usuarios.Count);
+
             Usuario usuarioEncontrado = usuarios
                 .FirstOrDefault(u => u.email == email && u.password == password);
+
+            
 
             if (usuarioEncontrado != null)
             {
