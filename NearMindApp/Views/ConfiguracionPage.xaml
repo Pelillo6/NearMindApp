@@ -3,9 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NearMindApp.Views.ConfiguracionPage"
              Title="ConfiguracionPage">
-    <VerticalStackLayout Spacing="25" Padding="30">
-        <Label Text="Configuración de la aplicación" 
-               FontSize="24" 
-               HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout>
+        <Label Text="Validar psicologos"
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="Start" />
+
+        <ListView x:Name="PsicologosListView"
+                  ItemTapped="OnPsicologoTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Nombre}" Detail="{Binding Validado, Converter={StaticResource BoolToStringConverter}}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

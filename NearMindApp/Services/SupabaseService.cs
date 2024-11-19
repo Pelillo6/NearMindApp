@@ -84,5 +84,17 @@ namespace NearMindApp.Services
                 Console.WriteLine($"Error al actualizar elemento: {ex.Message}");
             }
         }
+
+
+        public async Task<List<Psicologo>> ObtenerPsicologosNoValidados()
+        {
+            var response = await _client.From<Psicologo>()
+                .Select("*")
+                .Filter<bool>("validado", Supabase.Postgrest.Constants.Operator.Equals, false)
+                .Get();
+
+            return response.Models;
+        }
+
     }
 }

@@ -85,7 +85,7 @@ namespace NearMindApp.ModelViews
                     Email = email,
                     Password = password,
                     Telefono = telefono,
-                    Especialidades = especialidadesSeleccionadas // Asignar especialidades seleccionadas
+                    especialidades = especialidadesSeleccionadas // Asignar especialidades seleccionadas
                 };
             }
             else
