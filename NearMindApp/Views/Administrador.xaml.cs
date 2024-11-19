@@ -14,7 +14,7 @@ namespace NearMindApp.Views
         private async void OnNavigateToListaSolicitudesClicked(object sender, EventArgs e)
         {
             // Navegamos a la página Lista de Solicitudes
-            await Navigation.PushAsync(new ListaSolicitudes());
+            await Navigation.PushAsync(new solicitudPage());
         }
     }
 }
