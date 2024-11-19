@@ -40,20 +40,29 @@ namespace NearMindApp.Models
         public string rol { get; set; }
 
         [JsonPropertyName("especialidades")]
-        public List<Models.Especialidad> especialidades
+        public List<Especialidad> especialidades
         {
             get
             {
+                if (string.IsNullOrEmpty(especialidadesString))
+                {
+                    return new List<Especialidad>();
+                }
+
                 return especialidadesString.Split(',')
-                    .Select(especialidad => Enum.Parse<Especialidad>(especialidad))
+                    .Where(especialidad => !string.IsNullOrWhiteSpace(especialidad))
+                    .Select(especialidad => Enum.TryParse<Especialidad>(especialidad, out var result) ? result : default)
+                    .Where(especialidad => especialidad != default)
                     .ToList();
             }
             set
             {
-                especialidadesString = string.Join(",", value.Select(e => e.ToString()));
+                especialidadesString = value != null && value.Any()
+                    ? string.Join(",", value.Select(e => e.ToString()))
+                    : string.Empty;
             }
         }
-        private string especialidadesString;
+        private string especialidadesString = string.Empty;
 
         [JsonPropertyName("validado")]
         public bool validado { get; set; }
@@ -62,6 +71,7 @@ namespace NearMindApp.Models
             id = Guid.NewGuid();
             historial = new List<Cita>();
             especialidades = new List<Especialidad>();
+            especialidadesString = string.Empty;
         }
     }
 }
