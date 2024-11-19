@@ -9,7 +9,7 @@ namespace NearMindApp.Models
 {
     public class Psicologo : Usuario
     {
-        public List<Models.Especialidad> Especialidades
+        public List<Models.Especialidad> especialidades
         {
             get
             {
@@ -25,7 +25,7 @@ namespace NearMindApp.Models
         private string especialidadesString;
         public Psicologo()
         {
-            Especialidades = new List<Especialidad>();
+            especialidades = new List<Especialidad>();
         }
     }
 }

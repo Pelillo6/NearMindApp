@@ -23,13 +23,13 @@ public partial class BuscadorPage : ContentPage
             var usuario = UsuarioService.Instance.UsuarioActual;
 
             // Filtrar la lista según el rol
-            if (usuario.Rol == "Psicologo")
+            if (usuario.rol == "Psicologo")
             {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.Rol == "Paciente").ToList();
+                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Paciente").ToList();
             }
-            else if (usuario.Rol == "Paciente")
+            else if (usuario.rol == "Paciente")
             {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.Rol == "Psicologo").ToList();
+                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Psicologo").ToList();
             }
         }
         catch (Exception ex)
@@ -42,9 +42,9 @@ public partial class BuscadorPage : ContentPage
     {
         if (e.CurrentSelection.FirstOrDefault() is Usuario usuarioSeleccionado)
         {
-            string detalles = $"Nombre: {usuarioSeleccionado.Nombre}\n" +
-                              $"Email: {usuarioSeleccionado.Email}\n" +
-                              $"Teléfono: {usuarioSeleccionado.Telefono}";
+            string detalles = $"Nombre: {usuarioSeleccionado.nombre}\n" +
+                              $"Email: {usuarioSeleccionado.email}\n" +
+                              $"Teléfono: {usuarioSeleccionado.telefono}";
 
             await DisplayAlert("Detalles del Usuario", detalles, "Cerrar");
         }
@@ -61,7 +61,7 @@ public partial class BuscadorPage : ContentPage
             // Muestra los resultados (por ejemplo, en la consola)
             foreach (var usuario in usuarios)
             {
-                Console.WriteLine($"Nombre: {usuario.Nombre}, Email: {usuario.Email}");
+                Console.WriteLine($"Nombre: {usuario.nombre}, Email: {usuario.email}");
             }
         }
         catch (Exception ex)

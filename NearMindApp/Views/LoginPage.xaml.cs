@@ -35,7 +35,7 @@ public partial class LoginPage : ContentPage
             // Llamada a Supabase para autenticar al usuario
             List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
             Usuario usuarioEncontrado = usuarios
-                .FirstOrDefault(u => u.Email == email && u.Password == password);
+                .FirstOrDefault(u => u.email == email && u.password == password);
 
             if (usuarioEncontrado != null)
             {
