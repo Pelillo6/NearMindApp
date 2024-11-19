@@ -24,7 +24,7 @@ public partial class BuscadorPage : ContentPage
             // Muestra los resultados (por ejemplo, en la consola)
             foreach (var usuario in usuarios)
             {
-                Console.WriteLine($"Nombre: {usuario.Nombre}, Email: {usuario.Email}");
+                Console.WriteLine($"Nombre: {usuario.nombre}, Email: {usuario.email}");
             }
         }
         catch (Exception ex)

@@ -19,6 +19,10 @@ namespace NearMindApp.Services
             _client = new Supabase.Client(url, apiKey);
         }
 
+        public Supabase.Client GetClient() {
+            return _client;
+        }
+
         // Método de autenticación
         public async Task<User> IniciarSesion(string email, string password)
         {
