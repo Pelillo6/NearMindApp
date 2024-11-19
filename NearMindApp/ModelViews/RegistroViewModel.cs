@@ -62,7 +62,7 @@ namespace NearMindApp.ModelViews
         };
 
         [ObservableProperty]
-        private List<Models.Especialidad> especialidadesSeleccionadas = new List<Models.Especialidad>();
+        private List<Especialidad> especialidadesSeleccionadas = new List<Especialidad>();
 
         // Comando para registrar
         public ICommand RegistrarCommand { get; }
@@ -95,7 +95,7 @@ namespace NearMindApp.ModelViews
                     password = password,
                     telefono = telefono,
                     rol = rol,
-                    especialidades = especialidadesSeleccionadas,
+                    especialidades = especialidadesSeleccionadas.Select(e => e.Name).ToList(),
                     validado = false
                 };
                 // Llamar a Supabase para registrar al psicólogo
