@@ -65,5 +65,10 @@ namespace NearMindApp.Services
         {
             await _client.From<T>().Insert(elemento);
         }
+
+        public async Task ActualizarElementoEnTabla<T>(System.Guid id, T elemento) where T : class
+        {
+            
+        }
     }
 }

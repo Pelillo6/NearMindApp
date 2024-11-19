@@ -4,10 +4,29 @@
              x:Class="NearMindApp.Views.PerfilPage"
              Title="Perfil"
              IconImageSource="user.svg">
-    <VerticalStackLayout>
-        <Label 
-            Text="Estas en el perfil"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Perfil de Usuario"
+                   FontSize="24"
+                   HorizontalOptions="Center" />
+
+            <!-- Nombre -->
+            <Label Text="Nombre:" />
+            <Entry x:Name="NombreEntry" Placeholder="Nombre" />
+
+            <!-- Correo -->
+            <Label Text="Correo Electrónico:" />
+            <Entry x:Name="CorreoEntry" Placeholder="Correo Electrónico" Keyboard="Email" />
+
+            <!-- Contraseña -->
+            <Label Text="Contraseña:" />
+            <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" />
+
+            <!-- Botón para guardar -->
+            <Button Text="Guardar Cambios" Clicked="OnGuardarCambiosClicked" />
+
+            <!-- Mensaje de error o éxito -->
+            <Label x:Name="MensajeLabel" TextColor="Green" IsVisible="False" HorizontalOptions="Center" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

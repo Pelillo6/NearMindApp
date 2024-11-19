@@ -1,38 +1,27 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:NearMindApp.ModelViews"
-             x:Class="NearMindApp.Views.LoginPage">
+             x:Class="NearMindApp.Views.LoginPage"
+             Title="Inicio de Sesión">
+    <StackLayout Padding="10" Spacing="20">
+        <Label Text="Inicia Sesión" 
+               FontSize="24" 
+               HorizontalOptions="Center" />
 
-    <ContentPage.BindingContext>
-        <vm:LoginViewModel />
-    </ContentPage.BindingContext>
+        <Entry x:Name="EmailEntry" 
+               Placeholder="Email" 
+               Keyboard="Email" />
 
-    <StackLayout Padding="20" VerticalOptions="CenterAndExpand" Spacing="15">
+        <Entry x:Name="PasswordEntry" 
+               Placeholder="Contraseña" 
+               IsPassword="True" />
 
-        <Entry Placeholder="Correo Electrónico"
-               Text="{Binding Email}"
-               Keyboard="Email"
-               HorizontalOptions="FillAndExpand" />
+        <Button Text="Iniciar Sesión" 
+                Clicked="OnLoginClicked" 
+                HorizontalOptions="Center" />
 
-        <Entry Placeholder="Contraseña"
-               Text="{Binding Password}"
-               IsPassword="True"
-               HorizontalOptions="FillAndExpand" />
-
-        <Button Text="Iniciar Sesión"
-                Command="{Binding IniciarSesionCommand}"
-                BackgroundColor="#6200EE"
-                TextColor="White"
-                CornerRadius="10"
-                Padding="10,5" />
-
-        <!-- Mostrar mensaje de inicio de sesión -->
-        <Label Text="{Binding Mensaje}"
-               TextColor="Red"
-               HorizontalOptions="Center"
-               VerticalOptions="CenterAndExpand" />
-
+        <Label x:Name="ErrorLabel" 
+               TextColor="Red" 
+               IsVisible="False" 
+               HorizontalOptions="Center" />
     </StackLayout>
-
 </ContentPage>
