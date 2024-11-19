@@ -11,6 +11,7 @@ public partial class BuscadorPage : ContentPage
     {
         InitializeComponent();
         _supabaseService = new SupabaseService();
+        BindingContext = this;
     }
 
     protected override async void OnAppearing()
@@ -34,6 +35,15 @@ public partial class BuscadorPage : ContentPage
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"No se pudieron cargar los usuarios: {ex.Message}", "OK");
+        }
+    }
+
+    public string ListaDeUsuariosTexto
+    {
+        get
+        {
+            var usuario = UsuarioService.Instance.UsuarioActual;
+            return usuario.rol == "Paciente" ? "Lista de Psicólogos" : "Lista de Pacientes";
         }
     }
 
