@@ -12,8 +12,6 @@ public partial class BuscadorPage : ContentPage
     {
         InitializeComponent();
         _supabaseService = new SupabaseService();
-        var usuario = UsuarioService.Instance.UsuarioActual;
-        _rolUsuario = usuario.rol;
     }
 
     private async void OnCargarUsuariosClicked(object sender, EventArgs e)
@@ -21,15 +19,16 @@ public partial class BuscadorPage : ContentPage
         try
         {
             List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
+            var usuario = UsuarioService.Instance.UsuarioActual;
 
             // Filtrar la lista según el rol
-            if (_rolUsuario == "Psicologo")
+            if (usuario is Psicologo)
             {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Paciente").ToList();
+                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u is Paciente).ToList();
             }
-            else if (_rolUsuario == "Paciente")
+            else if (usuario is Paciente)
             {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Psicologo").ToList();
+                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u is Psicologo).ToList();
             }
         }
         catch (Exception ex)
@@ -42,9 +41,9 @@ public partial class BuscadorPage : ContentPage
     {
         if (e.CurrentSelection.FirstOrDefault() is Usuario usuarioSeleccionado)
         {
-            string detalles = $"Nombre: {usuarioSeleccionado.nombre}\n" +
-                              $"Email: {usuarioSeleccionado.email}\n" +
-                              $"Teléfono: {usuarioSeleccionado.telefono}";
+            string detalles = $"Nombre: {usuarioSeleccionado.Nombre}\n" +
+                              $"Email: {usuarioSeleccionado.Email}\n" +
+                              $"Teléfono: {usuarioSeleccionado.Telefono}";
 
             await DisplayAlert("Detalles del Usuario", detalles, "Cerrar");
         }
@@ -61,7 +60,7 @@ public partial class BuscadorPage : ContentPage
             // Muestra los resultados (por ejemplo, en la consola)
             foreach (var usuario in usuarios)
             {
-                Console.WriteLine($"Nombre: {usuario.nombre}, Email: {usuario.email}");
+                Console.WriteLine($"Nombre: {usuario.Nombre}, Email: {usuario.Email}");
             }
         }
         catch (Exception ex)

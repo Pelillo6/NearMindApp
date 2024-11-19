@@ -23,9 +23,9 @@ public partial class PerfilPage : ContentPage
         if (_usuarioActual != null)
         {
             // Mostrar los datos del usuario en los campos
-            NombreEntry.Text = _usuarioActual.nombre;
-            CorreoEntry.Text = _usuarioActual.email;
-            PasswordEntry.Text = _usuarioActual.password;
+            NombreEntry.Text = _usuarioActual.Nombre;
+            CorreoEntry.Text = _usuarioActual.Email;
+            PasswordEntry.Text = _usuarioActual.Password;
         }
     }
 
@@ -47,11 +47,11 @@ public partial class PerfilPage : ContentPage
         try
         {
             // Actualizar los datos en la base de datos
-            _usuarioActual.nombre = nuevoNombre;
-            _usuarioActual.email = nuevoCorreo;
-            _usuarioActual.password = nuevaPassword;
+            _usuarioActual.Nombre = nuevoNombre;
+            _usuarioActual.Email = nuevoCorreo;
+            _usuarioActual.Password = nuevaPassword;
 
-            await _supabaseService.ActualizarElementoEnTabla(_usuarioActual.id, _usuarioActual);
+            await _supabaseService.ActualizarElementoEnTabla(_usuarioActual.Id, _usuarioActual);
 
             // Actualizar el servicio compartido
             UsuarioService.Instance.SetUsuarioActual(_usuarioActual);
