@@ -95,7 +95,8 @@ namespace NearMindApp.ModelViews
                     password = password,
                     telefono = telefono,
                     rol = rol,
-                    especialidades = especialidadesSeleccionadas // Asignar especialidades seleccionadas
+                    especialidades = especialidadesSeleccionadas,
+                    validado = false
                 };
                 // Llamar a Supabase para registrar al psicólogo
                 var resultadoPsicologo = await _supabaseClient.From<Psicologo>().Insert(psicologo);
