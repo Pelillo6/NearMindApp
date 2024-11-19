@@ -9,8 +9,8 @@ public partial class BuscadorPage : ContentPage
     private string _rolUsuario;
 
     public BuscadorPage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         _supabaseService = new SupabaseService();
     }
 

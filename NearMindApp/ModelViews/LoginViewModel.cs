@@ -8,8 +8,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NearMindApp.Services;
 using NearMindApp.Models;
+using NearMindApp.Views;
 using Supabase.Interfaces;
 using Supabase;
+using Microsoft.Win32;
 
 namespace NearMindApp.ModelViews
 {
@@ -28,13 +30,18 @@ namespace NearMindApp.ModelViews
         private string mensaje = "Esperando...";
 
         public ICommand IniciarSesionCommand { get; }
-
+        public ICommand NavigateToRegisterCommand { get; }
         public LoginViewModel()
         {
             _supabaseClient = new Client("https://ypjbezsniccydiqdhnvs.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwamJlenNuaWNjeWRpcWRobnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk4NzUwMjEsImV4cCI6MjA0NTQ1MTAyMX0.VJiINPZnNn9NCaCQrHwwUe51MCitZl-gT4AjI5nPhJw");
             IniciarSesionCommand = new AsyncRelayCommand(IniciarSesionAsync);
+            NavigateToRegisterCommand = new RelayCommand(OnNavigateToRegister);
         }
-
+        private async void OnNavigateToRegister()
+        {
+            // Navegar a la página de registro
+            Application.Current.MainPage = new NavigationPage(new RegistroPage());
+        }
         private async Task IniciarSesionAsync()
         {
             var resultado = await _supabaseClient.From<Usuario>()

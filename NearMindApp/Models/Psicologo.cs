@@ -9,26 +9,23 @@ namespace NearMindApp.Models
 {
     public class Psicologo : Usuario
     {
-        public enum EspecialidadEnum
+        public List<Models.Especialidad> Especialidades
         {
-            PsicologiaClinica,
-            PsicologiaInfantilYAdolescente,
-            PsicologiaEducativa,
-            PsicologiaOrganizacional,
-            PsicologiaDelDeporte,
-            PsicologiaDeLaSalud,
-            PsicoterapiaFamiliarYPareja,
-            PsicologiaForense,
-            Neuropsicologia,
-            PsicologiaDeLaSexualidad,
-            PsicologiaSocial,
-            TerapiaDeAdicciones,
-            PsicologiaTranspersonal,
-            PsicologiaGerontologica,
-            PsicologiaPositiva
+            get
+            {
+                return especialidadesString.Split(',')
+                    .Select(especialidad => Enum.Parse<Especialidad>(especialidad))
+                    .ToList();
+            }
+            set
+            {
+                especialidadesString = string.Join(",", value.Select(e => e.ToString()));
+            }
         }
-
-        [JsonPropertyName("especialidad")]
-        public EspecialidadEnum Especialidad { get; set; }
+        private string especialidadesString;
+        public Psicologo()
+        {
+            Especialidades = new List<Especialidad>();
+        }
     }
 }

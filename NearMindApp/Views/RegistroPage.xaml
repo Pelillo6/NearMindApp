@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NearMindApp"
+             xmlns:views="clr-namespace:NearMindApp.Views"
+             xmlns:vm="clr-namespace:NearMindApp.ModelViews"
+             x:Class="NearMindApp.Views.RegistroPage">
+
+    <ContentPage.BindingContext>
+        <vm:RegistroViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20" Spacing="15">
+
+        <!-- Selección de rol -->
+        <Label Text="¿Cómo deseas registrarte?"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+
+        <Picker SelectedItem="{Binding Rol}"
+                ItemsSource="{Binding Roles}"
+                Title="Selecciona tu rol"
+                HorizontalOptions="FillAndExpand"/>
+
+        <!-- Datos comunes para todos -->
+        <Entry Placeholder="Nombre Completo"
+               Text="{Binding Nombre}"
+               HorizontalOptions="FillAndExpand" />
+
+        <Entry Placeholder="Correo Electrónico"
+               Text="{Binding Email}"
+               Keyboard="Email"
+               HorizontalOptions="FillAndExpand" />
+
+        <Entry Placeholder="Contraseña"
+               Text="{Binding Password}"
+               IsPassword="True"
+               HorizontalOptions="FillAndExpand" />
+
+        <Entry Placeholder="Teléfono"
+               Text="{Binding Telefono}"
+               Keyboard="Telephone"
+               HorizontalOptions="FillAndExpand" />
+
+        <!-- Mostrar campo de especialidad solo si es Psicólogo -->
+        <StackLayout IsVisible="{Binding IsPsicologoSelected}">
+            <Label Text="Especialidades"
+                   HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand" />
+
+            <CollectionView ItemsSource="{Binding EspecialidadesDisponibles}"
+                            SelectedItems="{Binding EspecialidadesSeleccionadas}"
+                            SelectionMode="Multiple">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <Label Text="{Binding Name}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <!-- Botón de registro -->
+        <Button Text="Registrar"
+                Command="{Binding RegistrarCommand}"
+                BackgroundColor="#6200EE"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="10,5" />
+
+    </StackLayout>
+</ContentPage>
