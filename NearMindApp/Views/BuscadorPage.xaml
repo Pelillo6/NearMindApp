@@ -22,7 +22,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
         <Button Text="Cargar Usuarios"
                 HorizontalOptions="Center"
                 Clicked="OnCargarUsuariosClicked" />

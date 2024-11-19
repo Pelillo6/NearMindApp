@@ -31,6 +31,8 @@ namespace NearMindApp.Models
         [Required]
         [JsonPropertyName("password")]
         public string Password { get; set; }
+        [JsonPropertyName("rol")]
+        public string Rol { get; set; }
 
         // Historial compartido por Psicologo y Paciente
         [JsonPropertyName("historial")]

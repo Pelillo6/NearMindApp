@@ -14,21 +14,23 @@ public partial class BuscadorPage : ContentPage
         _supabaseService = new SupabaseService();
     }
 
+    //protected override async void OnAppearing()
     private async void OnCargarUsuariosClicked(object sender, EventArgs e)
     {
+        //base.OnAppearing();
         try
         {
             List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
             var usuario = UsuarioService.Instance.UsuarioActual;
 
             // Filtrar la lista según el rol
-            if (usuario is Psicologo)
+            if (usuario.Rol == "Psicologo")
             {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u is Paciente).ToList();
+                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.Rol == "Paciente").ToList();
             }
-            else if (usuario is Paciente)
+            else if (usuario.Rol == "Paciente")
             {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u is Psicologo).ToList();
+                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.Rol == "Psicologo").ToList();
             }
         }
         catch (Exception ex)
