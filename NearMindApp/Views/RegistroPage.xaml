@@ -48,12 +48,15 @@
                    HorizontalOptions="Center"
                    VerticalOptions="CenterAndExpand" />
 
+            <!-- Aplica el HeightRequest directamente en el CollectionView -->
             <CollectionView ItemsSource="{Binding EspecialidadesDisponibles}"
                             SelectedItems="{Binding EspecialidadesSeleccionadas}"
-                            SelectionMode="Multiple">
+                            SelectionMode="Multiple"
+                            HeightRequest="200">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">
+                            <!-- CheckBox para seleccionar especialidades -->
                             <CheckBox IsChecked="{Binding IsSelected}" />
                             <Label Text="{Binding Name}" />
                         </StackLayout>
