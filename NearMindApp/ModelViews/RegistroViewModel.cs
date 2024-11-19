@@ -109,6 +109,7 @@ namespace NearMindApp.ModelViews
         partial void OnRolChanged(string value)
         {
             isPsicologoSelected = value == "Psicólogo";
+            OnPropertyChanged(nameof(IsPsicologoSelected));
         }
     }
 
