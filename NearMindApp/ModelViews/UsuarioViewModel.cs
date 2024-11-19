@@ -35,7 +35,7 @@ namespace NearMindApp.ModelViews
             {
                 // Intenta recuperar un usuario coincidente de la tabla "Usuario"
                 var resultado = await _client.From<Usuario>()
-                    .Where(u => u.email == email && u.password == contraseña)
+                    .Where(u => u.Email == email && u.Password == contraseña)
                     .Get();
 
                 if (resultado != null)

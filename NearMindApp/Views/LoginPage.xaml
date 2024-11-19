@@ -23,5 +23,10 @@
                TextColor="Red" 
                IsVisible="False" 
                HorizontalOptions="Center" />
+
+        <Button Text="¿No tienes cuenta? Regístrate" 
+                Clicked="OnRegisterClicked"
+                HorizontalOptions="Center" 
+                TextColor="Blue" />
     </StackLayout>
 </ContentPage>
