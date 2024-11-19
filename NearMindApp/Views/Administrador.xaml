@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NearMindApp.Views.Administrador"
+             Title="Administrador">
+
+    <VerticalStackLayout Spacing="25" Padding="30,60,30,30">
+
+        <!-- Título o bienvenida del administrador -->
+        <Label 
+            Text="Bienvenido Administrador"
+            FontSize="24"
+            HorizontalOptions="Center" 
+            VerticalOptions="Center" />
+
+        <!-- Botón para navegar a la lista de solicitudes -->
+        <Button 
+            Text="Ir a Lista de Solicitudes"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand"
+            Clicked="OnNavigateToListaSolicitudesClicked" />
+
+    </VerticalStackLayout>
+</ContentPage>
