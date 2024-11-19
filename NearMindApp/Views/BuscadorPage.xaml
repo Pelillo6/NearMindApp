@@ -15,16 +15,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label Text="{Binding nombre}" 
+                        <Label Text="{Binding Nombre}" 
                                FontSize="16" 
                                VerticalOptions="Center" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <Button Text="Cargar Usuarios"
-                HorizontalOptions="Center"
-                Clicked="OnCargarUsuariosClicked" />
     </StackLayout>
 </ContentPage>
