@@ -53,7 +53,11 @@ public partial class BuscadorPage : ContentPage
         {
             string detalles = $"Nombre: {usuarioSeleccionado.nombre}\n" +
                               $"Email: {usuarioSeleccionado.email}\n" +
-                              $"Teléfono: {usuarioSeleccionado.telefono}";
+                              $"Teléfono: {usuarioSeleccionado.telefono}\n";
+
+            if (UsuarioService.Instance.UsuarioActual.rol == "Paciente") {
+                detalles += $"Especialidad: {usuarioSeleccionado.especialidad} \n"; 
+            }
 
             await DisplayAlert("Detalles del Usuario", detalles, "Cerrar");
         }
