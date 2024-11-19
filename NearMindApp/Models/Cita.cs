@@ -26,6 +26,9 @@ namespace NearMindApp.Models
         [JsonPropertyName("usuario2_id")]
         public Guid usuario2_id { get; set; }
 
+        [JsonPropertyName("nota")]
+        public string nota { get; set; }
+
         public Cita()
         {
             id = Guid.NewGuid();

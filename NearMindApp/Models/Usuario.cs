@@ -34,7 +34,7 @@ namespace NearMindApp.Models
 
         // Historial compartido por Psicologo y Paciente
         [JsonPropertyName("historial")]
-        public List<Sesion> historial { get; set; }
+        public List<Cita> historial { get; set; }
 
         [JsonPropertyName("rol")]
         public string rol { get; set; }
@@ -60,7 +60,7 @@ namespace NearMindApp.Models
         public Usuario()
         {
             id = Guid.NewGuid();
-            historial = new List<Sesion>();
+            historial = new List<Cita>();
             especialidades = new List<Especialidad>();
         }
     }

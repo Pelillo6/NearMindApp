@@ -88,7 +88,7 @@ namespace NearMindApp.ModelViews
             Usuario usuario;
             if (rol == "Psicólogo")
             {
-                var psicologo = new Psicologo
+                var psicologo = new Usuario
                 {
                     nombre = nombre,
                     email = email,
@@ -99,7 +99,7 @@ namespace NearMindApp.ModelViews
                     validado = false
                 };
                 // Llamar a Supabase para registrar al psicólogo
-                var resultadoPsicologo = await _supabaseClient.From<Psicologo>().Insert(psicologo);
+                var resultadoPsicologo = await _supabaseClient.From<Usuario>().Insert(psicologo);
                 if (resultadoPsicologo.Models == null || !resultadoPsicologo.Models.Any())
                 {
                     mensaje = "No se pudo registrar al psicólogo.";
@@ -112,7 +112,7 @@ namespace NearMindApp.ModelViews
             else if (rol == "Paciente")
             {
                 // Crear paciente (hereda de Usuario)
-                var paciente = new Paciente
+                var paciente = new Usuario
                 {
                     nombre = nombre,
                     email = email,
@@ -122,7 +122,7 @@ namespace NearMindApp.ModelViews
                 };
 
                 // Llamar a Supabase para registrar al paciente
-                var resultadoPaciente = await _supabaseClient.From<Paciente>().Insert(paciente);
+                var resultadoPaciente = await _supabaseClient.From<Usuario>().Insert(paciente);
                 if (resultadoPaciente.Models == null || !resultadoPaciente.Models.Any())
                 {
                     mensaje = "No se pudo registrar al paciente.";
