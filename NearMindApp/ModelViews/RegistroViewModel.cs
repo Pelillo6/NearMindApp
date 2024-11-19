@@ -7,14 +7,21 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NearMindApp.Models;
+using Supabase;
+using Supabase.Interfaces;
 
 namespace NearMindApp.ModelViews
 {
     public partial class RegistroViewModel : ObservableObject
     {
+        private readonly Client _supabaseClient;
+
         // Propiedades de la vista
         [ObservableProperty]
         private string nombre;
+
+        [ObservableProperty]
+        private string mensaje;
 
         [ObservableProperty]
         private string email;
@@ -62,6 +69,7 @@ namespace NearMindApp.ModelViews
 
         public RegistroViewModel()
         {
+            _supabaseClient = new Client("https://ypjbezsniccydiqdhnvs.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwamJlenNuaWNjeWRpcWRobnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk4NzUwMjEsImV4cCI6MjA0NTQ1MTAyMX0.VJiINPZnNn9NCaCQrHwwUe51MCitZl-gT4AjI5nPhJw");
             RegistrarCommand = new AsyncRelayCommand(RegistrarAsync);
         }
 
@@ -72,6 +80,7 @@ namespace NearMindApp.ModelViews
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 // Mostrar error si falta algún dato
+                mensaje = "Los campos Nombre, Email y Contraseña son obligatorios";
                 return;
             }
 
@@ -79,30 +88,54 @@ namespace NearMindApp.ModelViews
             Usuario usuario;
             if (rol == "Psicólogo")
             {
-                usuario = new Psicologo
+                var psicologo = new Psicologo
                 {
-                    Nombre = nombre,
-                    Email = email,
-                    Password = password,
-                    Telefono = telefono,
-                    especialidades = especialidadesSeleccionadas // Asignar especialidades seleccionadas
+                    nombre = nombre,
+                    email = email,
+                    password = password,
+                    telefono = telefono,
+                    rol = rol,
+                    especialidades = especialidadesSeleccionadas,
+                    validado = false
                 };
+                // Llamar a Supabase para registrar al psicólogo
+                var resultadoPsicologo = await _supabaseClient.From<Psicologo>().Insert(psicologo);
+                if (resultadoPsicologo.Models == null || !resultadoPsicologo.Models.Any())
+                {
+                    mensaje = "No se pudo registrar al psicólogo.";
+                }
+                else
+                {
+                    mensaje = "Psicólogo registrado correctamente.";
+                }
+            }
+            else if (rol == "Paciente")
+            {
+                // Crear paciente (hereda de Usuario)
+                var paciente = new Paciente
+                {
+                    nombre = nombre,
+                    email = email,
+                    password = password,
+                    telefono = telefono,
+                    rol = rol
+                };
+
+                // Llamar a Supabase para registrar al paciente
+                var resultadoPaciente = await _supabaseClient.From<Paciente>().Insert(paciente);
+                if (resultadoPaciente.Models == null || !resultadoPaciente.Models.Any())
+                {
+                    mensaje = "No se pudo registrar al paciente.";
+                }
+                else
+                {
+                    mensaje = "Paciente registrado correctamente.";
+                }
             }
             else
             {
-                usuario = new Paciente
-                {
-                    Nombre = nombre,
-                    Email = email,
-                    Password = password,
-                    Telefono = telefono
-                };
+                mensaje = "Rol no válido";
             }
-
-            // Llamada para guardar el usuario en la base de datos...
-            // Ejemplo: await _usuarioService.RegistrarUsuarioAsync(usuario);
-
-            // Mostrar un mensaje de éxito o redirigir a otra página si es necesario
         }
 
         // Propiedad calculada para mostrar u ocultar el campo de especialidad según el rol

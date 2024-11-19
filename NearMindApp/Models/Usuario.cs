@@ -12,36 +12,36 @@ namespace NearMindApp.Models
     public class Usuario : BaseModel
     {
         [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
 
         [Required]
         [JsonPropertyName("nombre")]
-        public string Nombre { get; set; }
+        public string nombre { get; set; }
 
         [Required]
         [JsonPropertyName("email")]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [JsonPropertyName("telefono")]
-        public string Telefono { get; set; }
+        public string telefono { get; set; }
 
         [JsonPropertyName("fecha_nacimiento")]
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime fecha_nacimiento { get; set; }
 
         [Required]
         [JsonPropertyName("password")]
-        public string Password { get; set; }
-        [JsonPropertyName("rol")]
-        public string Rol { get; set; }
+        public string password { get; set; }
 
         // Historial compartido por Psicologo y Paciente
         [JsonPropertyName("historial")]
-        public List<Sesion> Historial { get; set; }
+        public List<Sesion> historial { get; set; }
 
+        [JsonPropertyName("rol")]
+        public string rol { get; set; }
         public Usuario()
         {
-            Id = Guid.NewGuid();
-            Historial = new List<Sesion>();
+            id = Guid.NewGuid();
+            historial = new List<Sesion>();
         }
     }
 }

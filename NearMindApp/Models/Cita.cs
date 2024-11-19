@@ -12,29 +12,29 @@ namespace NearMindApp.Models
     public class Cita : BaseModel
     {
         [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
 
         [Required]
         [JsonPropertyName("fecha")]
-        public DateTime Fecha { get; set; }
+        public DateTime fecha { get; set; }
 
         [Required]
         [JsonPropertyName("psicologo_id")]
-        public Guid PsicologoId { get; set; }
+        public Guid osicologo_id { get; set; }
 
         [JsonPropertyName("psicologo")]
-        public Psicologo Psicologo { get; set; }
+        public Psicologo psicologo { get; set; }
 
         [Required]
         [JsonPropertyName("paciente_id")]
-        public Guid PacienteId { get; set; }
+        public Guid pacienteId { get; set; }
 
         [JsonPropertyName("paciente")]
-        public Paciente Paciente { get; set; }
+        public Paciente paciente { get; set; }
 
         public Cita()
         {
-            Id = Guid.NewGuid();
+            id = Guid.NewGuid();
         }
     }
 }
