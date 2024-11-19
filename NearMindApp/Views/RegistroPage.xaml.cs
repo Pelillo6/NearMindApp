@@ -1,9 +1,9 @@
 namespace NearMindApp.Views;
 
-public partial class NewPage1 : ContentPage
+public partial class RegistroPage : ContentPage
 {
-	public NewPage1()
-	{
-		InitializeComponent();
-	}
+    public RegistroPage()
+    {
+        InitializeComponent();
+    }
 }

@@ -13,6 +13,11 @@ public partial class LoginPage : ContentPage
         _supabaseService = new SupabaseService();
     }
 
+    private async void OnRegisterClicked(object sender, EventArgs e)
+    {
+        // Navegar a la página de registro
+        await Navigation.PushAsync(new RegistroPage());
+    }
     private async void OnLoginClicked(object sender, EventArgs e)
     {
         string email = EmailEntry.Text?.Trim();

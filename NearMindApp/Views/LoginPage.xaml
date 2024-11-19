@@ -3,30 +3,30 @@
              x:Class="NearMindApp.Views.LoginPage"
              Title="Inicio de Sesión">
     <StackLayout Padding="10" Spacing="20">
-        <Label Text="Inicia Sesión" 
-               FontSize="24" 
+        <Label Text="Inicia Sesión"
+               FontSize="24"
                HorizontalOptions="Center" />
 
-        <Entry x:Name="EmailEntry" 
-               Placeholder="Email" 
+        <Entry x:Name="EmailEntry"
+               Placeholder="Email"
                Keyboard="Email" />
 
-        <Entry x:Name="PasswordEntry" 
-               Placeholder="Contraseña" 
+        <Entry x:Name="PasswordEntry"
+               Placeholder="Contraseña"
                IsPassword="True" />
 
-        <Button Text="Iniciar Sesión" 
-                Clicked="OnLoginClicked" 
+        <Button Text="Iniciar Sesión"
+                Clicked="OnLoginClicked"
                 HorizontalOptions="Center" />
 
-        <Label x:Name="ErrorLabel" 
-               TextColor="Red" 
-               IsVisible="False" 
+        <Label x:Name="ErrorLabel"
+               TextColor="Red"
+               IsVisible="False"
                HorizontalOptions="Center" />
 
-        <Button Text="¿No tienes cuenta? Regístrate" 
+        <Button Text="¿No tienes cuenta? Regístrate"
                 Clicked="OnRegisterClicked"
-                HorizontalOptions="Center" 
-                TextColor="Blue" />
+                HorizontalOptions="Center"
+                TextColor="White" />
     </StackLayout>
 </ContentPage>

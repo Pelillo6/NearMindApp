@@ -33,7 +33,6 @@ namespace NearMindApp.ModelViews
 
         [ObservableProperty]
         private bool isPsicologoSelected;
-        partial void OnRolChanged(string value);
 
         [ObservableProperty]
         private List<Especialidad> especialidadesDisponibles = new List<Especialidad>
