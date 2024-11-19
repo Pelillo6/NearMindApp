@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using NearMindApp.Models;
 using Supabase;
 using Supabase.Gotrue;
 using Supabase.Postgrest.Models;
+
 
 namespace NearMindApp.Services
 {
@@ -66,9 +68,22 @@ namespace NearMindApp.Services
             await _client.From<T>().Insert(elemento);
         }
 
-        public async Task ActualizarElementoEnTabla<T>(System.Guid id, T elemento) where T : class
+        public async Task ActualizarElementoEnTabla<T>(System.Guid id, T elemento) where T : BaseModel, new()
         {
-            
+            try
+            {
+                //TODO: Arreglar este metodo
+                var resultado = await _client
+                    .From<T>()
+                    .Update(elemento);
+                    
+                Console.WriteLine("Elemento actualizado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al actualizar el elemento: {ex.Message}");
+                throw;
+            }
         }
     }
 }
