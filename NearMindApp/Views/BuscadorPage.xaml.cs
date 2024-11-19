@@ -14,10 +14,9 @@ public partial class BuscadorPage : ContentPage
         _supabaseService = new SupabaseService();
     }
 
-    //protected override async void OnAppearing()
-    private async void OnCargarUsuariosClicked(object sender, EventArgs e)
+    protected override async void OnAppearing()
     {
-        //base.OnAppearing();
+        base.OnAppearing();
         try
         {
             List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
