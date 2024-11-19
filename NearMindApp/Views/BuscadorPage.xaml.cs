@@ -6,7 +6,6 @@ namespace NearMindApp.Views;
 public partial class BuscadorPage : ContentPage
 {
     private SupabaseService _supabaseService;
-    private string _rolUsuario;
 
     public BuscadorPage()
     {

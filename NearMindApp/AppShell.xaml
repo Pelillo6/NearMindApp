@@ -13,6 +13,7 @@
         <ShellContent Icon="search.svg" ContentTemplate="{DataTemplate views:BuscadorPage}" />
         <ShellContent Icon="chat.svg" ContentTemplate="{DataTemplate views:ChatPage}" />
         <ShellContent Icon="user.svg" ContentTemplate="{DataTemplate views:PerfilPage}" />
+        <ShellContent Icon="settings.svg" ContentTemplate="{DataTemplate views:ConfiguracionPage}" IsVisible="{Binding IsAdmin}" />
     </TabBar>
 
 </Shell>

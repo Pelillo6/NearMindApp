@@ -9,7 +9,8 @@ namespace NearMindApp.Models
 {
     public class Psicologo : Usuario
     {
-        public List<Models.Especialidad> Especialidades
+        [JsonPropertyName("especialidades")]
+        public List<Models.Especialidad> especialidades
         {
             get
             {
@@ -22,10 +23,16 @@ namespace NearMindApp.Models
                 especialidadesString = string.Join(",", value.Select(e => e.ToString()));
             }
         }
+
+        [JsonPropertyName("validado")]
+        public bool validado { get; set; }
+
+
         private string especialidadesString;
+
         public Psicologo()
         {
-            Especialidades = new List<Especialidad>();
+            especialidades = new List<Especialidad>();
         }
     }
 }

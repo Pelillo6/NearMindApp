@@ -68,21 +68,20 @@ namespace NearMindApp.Services
             await _client.From<T>().Insert(elemento);
         }
 
-        public async Task ActualizarElementoEnTabla<T>(System.Guid id, T elemento) where T : BaseModel, new()
+        // Método para actualizar un elemento en una tabla
+        public async Task ActualizarElementoEnTabla<T>(object id, T elemento) where T : BaseModel, new()
         {
             try
             {
-                //TODO: Arreglar este metodo
-                var resultado = await _client
-                    .From<T>()
-                    .Update(elemento);
-                    
-                Console.WriteLine("Elemento actualizado correctamente.");
+                var response = await _client.From<T>().Update(elemento);
+                if (response == null)
+                {
+                    Console.WriteLine($"Error al actualizar elemento ");
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al actualizar el elemento: {ex.Message}");
-                throw;
+                Console.WriteLine($"Error al actualizar elemento: {ex.Message}");
             }
         }
     }
