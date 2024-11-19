@@ -38,10 +38,30 @@ namespace NearMindApp.Models
 
         [JsonPropertyName("rol")]
         public string rol { get; set; }
+
+        [JsonPropertyName("especialidades")]
+        public List<Models.Especialidad> especialidades
+        {
+            get
+            {
+                return especialidadesString.Split(',')
+                    .Select(especialidad => Enum.Parse<Especialidad>(especialidad))
+                    .ToList();
+            }
+            set
+            {
+                especialidadesString = string.Join(",", value.Select(e => e.ToString()));
+            }
+        }
+        private string especialidadesString;
+
+        [JsonPropertyName("validado")]
+        public bool validado { get; set; }
         public Usuario()
         {
             id = Guid.NewGuid();
             historial = new List<Sesion>();
+            especialidades = new List<Especialidad>();
         }
     }
 }
