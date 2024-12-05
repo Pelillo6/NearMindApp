@@ -11,15 +11,12 @@ namespace NearMindApp.Models
 {
     public class Message : BaseModel
     {
-        [JsonPropertyName("id")]
         public Guid id { get; set; }
-        [JsonPropertyName("emisor_id")]
-        public Guid emisor_id { get; set; }
-        [JsonPropertyName("receptor_id")]
-        public Guid receptor_id { get; set; }
-        [JsonPropertyName("texto")]
+      
+        public Guid emisorId { get; set; }
+        public Guid receptorId { get; set; }
         public String texto { get; set; }
-        [JsonPropertyName("fecha_hora")]
-        public DateTime fecha_hora { get; set; }
+        public DateTime fechaHora { get; set; }
+        public String NombreEmisor { get; set; }
     }
 }

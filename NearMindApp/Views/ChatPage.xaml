@@ -10,8 +10,9 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
-                        <Label Text="{Binding User}" FontAttributes="Bold" />
-                        <Label Text="{Binding Text}" />
+                        <Label Text="{Binding NombreEmisor}" FontAttributes="Bold" />
+                        <Label Text="{Binding texto}" />
+                        <Label Text="{Binding fechaHora, StringFormat='{0:G}'}" FontSize="12" TextColor="Gray" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -19,7 +19,7 @@ public partial class PerfilPage : ContentPage
         base.OnAppearing();
 
         // Obtener el usuario logueado
-        _usuarioActual = UsuarioService.Instance.UsuarioActual;
+        _usuarioActual = UsuarioService.Instance.GetUsuarioActual();
         if (_usuarioActual != null)
         {
             // Mostrar los datos del usuario en los campos

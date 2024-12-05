@@ -1,6 +1,7 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
 using NearMindApp.Models;
+using NearMindApp.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,20 +24,23 @@ namespace NearMindApp.Utilidades
 
         private string GenerateConversationKey(Guid emisorId, Guid receptorId)
         {
-            // Ordena los IDs alfabéticamente para que la clave sea consistente
-            var ids = new List<Guid> { emisorId, receptorId };
-            ids.Sort();
-            return string.Join("_", ids);
+            string id1String = emisorId.ToString();
+            string id2String = receptorId.ToString();
+
+            return string.Compare(id1String, id2String, StringComparison.Ordinal) < 0
+                ? $"{id1String}_{id2String}"
+                : $"{id2String}_{id1String}";
         }
 
         public async Task SendMessageAsync(Guid emisorId, Guid receptorId, string text)
         {
             var message = new Message
             {
-                emisor_id = emisorId,
-                receptor_id = receptorId,
+                id = Guid.NewGuid(),
+                emisorId = emisorId,
+                receptorId = receptorId,
                 texto = text,
-                fecha_hora = DateTime.UtcNow
+                fechaHora = DateTime.UtcNow
             };
 
             string conversationKey = GenerateConversationKey(emisorId, receptorId);
@@ -72,7 +76,7 @@ namespace NearMindApp.Utilidades
             .OrderByKey()
             .OnceAsync<Message>();
 
-            return messages.Select(m => m.Object).OrderBy(m => m.fecha_hora).ToList();
+            return messages.Select(m => m.Object).OrderBy(m => m.fechaHora).ToList();
         }
     }
 }

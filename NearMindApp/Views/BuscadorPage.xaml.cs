@@ -20,7 +20,7 @@ public partial class BuscadorPage : ContentPage
         try
         {
             List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
-            var usuario = UsuarioService.Instance.UsuarioActual;
+            var usuario = UsuarioService.Instance.GetUsuarioActual();
 
             // Filtrar la lista según el rol
             if (usuario.rol == "Psicologo")
@@ -42,7 +42,7 @@ public partial class BuscadorPage : ContentPage
     {
         get
         {
-            var usuario = UsuarioService.Instance.UsuarioActual;
+            var usuario = UsuarioService.Instance.GetUsuarioActual();
             return usuario.rol == "Paciente" ? "Lista de Psicólogos" : "Lista de Pacientes";
         }
     }
@@ -55,7 +55,7 @@ public partial class BuscadorPage : ContentPage
                               $"Email: {usuarioSeleccionado.email}\n" +
                               $"Teléfono: {usuarioSeleccionado.telefono}\n";
 
-            if (UsuarioService.Instance.UsuarioActual.rol == "Paciente") {
+            if (UsuarioService.Instance.GetUsuarioActual().rol == "Paciente") {
                 detalles += $"Especialidad: {usuarioSeleccionado.especialidad} \n"; 
             }
 

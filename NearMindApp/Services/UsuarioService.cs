@@ -7,8 +7,11 @@ namespace NearMindApp.Services
         private static readonly Lazy<UsuarioService> _instance = new(() => new UsuarioService());
 
         private Usuario _usuarioActual;
+        private SupabaseService _supabaseService;
 
-        private UsuarioService() { }
+        private UsuarioService() {
+            _supabaseService = new SupabaseService();
+        }
 
         public static UsuarioService Instance => _instance.Value;
 
@@ -20,6 +23,12 @@ namespace NearMindApp.Services
         public Usuario GetUsuarioActual()
         {
             return _usuarioActual;
+        }
+
+        public async Task<Usuario> ObtenerUsuarioPorId(Guid id)
+        {
+            var usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
+            return usuarios.FirstOrDefault(u => u.id == id);
         }
 
         public bool IsUsuarioLogueado()

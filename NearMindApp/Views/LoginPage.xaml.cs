@@ -41,8 +41,6 @@ public partial class LoginPage : ContentPage
             Usuario usuarioEncontrado = usuarios
                 .FirstOrDefault(u => u.email == email && u.password == password);
 
-            
-
             if (usuarioEncontrado != null)
             {
                 // Guardar el usuario en el servicio compartido
