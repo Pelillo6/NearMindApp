@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:NearMindApp.ModelViews"
              x:Class="NearMindApp.Views.CalendarioPage"
              Title="Calendario"
              IconImageSource="calendar.svg">
+    <ContentPage.BindingContext>
+        <vm:CalendarioViewModel />
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout>
-        <Label 
-            Text="Estas en el calendario"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label
+            Text="Calendario de citas"
+            FontSize="24"
+            HorizontalOptions="Center"
+            Margin="0,10" />
+
+        <!-- Simulación del calendario -->
+        <CollectionView ItemsSource="{Binding DiasDelMes}" SelectionMode="Single" SelectedItem="{Binding DiaSeleccionado}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="7" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" BorderColor="{Binding TieneCita, Converter={StaticResource BooleanToColorConverter}}"
+                           CornerRadius="5" HasShadow="False">
+                        <Label Text="{Binding Dia}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Detalles de la cita -->
+        <StackLayout IsVisible="{Binding DiaSeleccionado.TieneCita}">
+            <Label Text="Detalles de la cita" FontSize="18" FontAttributes="Bold" Margin="10,20,10,5"/>
+            <Label Text="{Binding DiaSeleccionado.DetallesCita}" FontSize="16" HorizontalOptions="Center" />
+        </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

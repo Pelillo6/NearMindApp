@@ -29,6 +29,7 @@ namespace NearMindApp.ModelViews
         [ObservableProperty]
         private string mensaje = "Esperando...";
 
+        public static Guid UsuarioIdActual { get; private set; } // Propiedad estática para guardar el ID del usuario actual.
         public ICommand IniciarSesionCommand { get; }
         public ICommand NavigateToRegisterCommand { get; }
         public LoginViewModel()
@@ -53,6 +54,8 @@ namespace NearMindApp.ModelViews
             // Verificar si el usuario existe
             if (usuario != null)
             {
+                // Guardar el ID del usuario autenticado
+                UsuarioIdActual = usuario.id;
                 mensaje = "Sesión iniciada correctamente";
             }
             else
