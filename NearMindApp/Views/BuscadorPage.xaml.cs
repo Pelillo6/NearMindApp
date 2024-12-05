@@ -63,23 +63,11 @@ public partial class BuscadorPage : ContentPage
         }
     }
 
-    // Método ejecutado al hacer clic en el botón
-    private async void OnObtenerUsuariosClicked(object sender, EventArgs e)
+    private async void OnUsuarioSelected(object sender, SelectionChangedEventArgs e)
     {
-        try
+        if (e.CurrentSelection.FirstOrDefault() is Usuario usuarioSeleccionado)
         {
-            // Llamada al método para obtener los elementos de la tabla Usuario
-            List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
-
-            // Muestra los resultados (por ejemplo, en la consola)
-            foreach (var usuario in usuarios)
-            {
-                Console.WriteLine($"Nombre: {usuario.nombre}, Email: {usuario.email}");
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error al obtener usuarios: {ex.Message}");
+            await Navigation.PushAsync(new ChatPage(usuarioSeleccionado));
         }
     }
 }

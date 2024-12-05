@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NearMindApp.Services;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Supabase;
@@ -45,7 +46,7 @@ namespace NearMindApp.ModelViews
 
         private async Task CargarCitasAsync()
         {
-            var usuarioId = LoginViewModel.UsuarioIdActual; // Usar el ID del usuario autenticado.
+            var usuarioId = UsuarioService.Instance.GetUsuarioActual().id;
 
             var resultado = await _supabaseClient.From<Cita>()
                 .Where(c => c.usuario1_id == usuarioId || c.usuario2_id == usuarioId)

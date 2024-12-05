@@ -4,21 +4,27 @@ namespace NearMindApp.Services
 {
     public class UsuarioService
     {
-        private static UsuarioService _instance;
-        public Usuario UsuarioActual { get; private set; }
+        private static readonly Lazy<UsuarioService> _instance = new(() => new UsuarioService());
+
+        private Usuario _usuarioActual;
 
         private UsuarioService() { }
 
-        public static UsuarioService Instance => _instance ??= new UsuarioService();
+        public static UsuarioService Instance => _instance.Value;
 
         public void SetUsuarioActual(Usuario usuario)
         {
-            UsuarioActual = usuario;
+            _usuarioActual = usuario;
         }
 
-        public void CerrarSesion()
+        public Usuario GetUsuarioActual()
         {
-            UsuarioActual = null;
+            return _usuarioActual;
+        }
+
+        public bool IsUsuarioLogueado()
+        {
+            return _usuarioActual != null;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace NearMindApp
         {
             InitializeComponent();
 
-            var usuario = UsuarioService.Instance.UsuarioActual;
+            var usuario = UsuarioService.Instance.GetUsuarioActual();
             IsAdmin = usuario.rol == "Admin";
             IsNotAdmin = !IsAdmin;
             BindingContext = this;
