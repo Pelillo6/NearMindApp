@@ -43,6 +43,12 @@ namespace NearMindApp.Models
 
         [JsonPropertyName("validado")]
         public bool validado { get; set; }
+
+        [JsonPropertyName("precio")]
+        public double? precio { get; set; }
+
+        [JsonPropertyName("ubicacion")]
+        public string ubicacion { get; set; }
         public Usuario()
         {
             id = Guid.NewGuid();

@@ -12,6 +12,13 @@
 
     <StackLayout Padding="20" Spacing="15">
 
+        <Label Text="{Binding Mensaje}" 
+            TextColor="Green" 
+            FontSize="Medium" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center"
+            IsVisible="{Binding Mensaje, Converter={StaticResource StringToVisibilityConverter}}"/>
+
         <!-- Selección de rol -->
         <Label Text="¿Cómo deseas registrarte?"
                HorizontalOptions="Center"
@@ -40,6 +47,18 @@
         <Entry Placeholder="Teléfono"
                Text="{Binding Telefono}"
                Keyboard="Telephone"
+               HorizontalOptions="FillAndExpand" />
+
+        <!-- Ubicación -->
+        <Entry Placeholder="Ubicación"
+               Text="{Binding Ubicacion}"
+               HorizontalOptions="FillAndExpand" />
+
+        <!-- Precio por hora (solo para Psicólogos) -->
+        <Entry Placeholder="Precio por hora"
+               Text="{Binding Precio}"
+               Keyboard="Numeric"
+               IsVisible="{Binding IsPsicologoSelected}"
                HorizontalOptions="FillAndExpand" />
 
         <!-- Botón de registro -->

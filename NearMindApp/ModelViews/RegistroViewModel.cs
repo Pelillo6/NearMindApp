@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,12 @@ namespace NearMindApp.ModelViews
 
         [ObservableProperty]
         private string rol;
+
+        [ObservableProperty]
+        private string ubicacion;
+
+        [ObservableProperty]
+        private double? precio;
 
         [ObservableProperty]
         private List<string> roles = new List<string> { "Psicologo", "Paciente" };
@@ -76,18 +83,20 @@ namespace NearMindApp.ModelViews
         // Método para registrar al usuario
         private async Task RegistrarAsync()
         {
-            // Validar y crear el usuario según el rol
             if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                // Mostrar error si falta algún dato
-                mensaje = "Los campos Nombre, Email y Contraseña son obligatorios";
+                Mensaje = "Los campos Nombre, Email y Contraseña son obligatorios";
                 return;
             }
 
-            // Aquí se crearía el usuario en la base de datos (Supabase) según el rol
-            Usuario usuario;
             if (rol == "Psicologo")
             {
+                if (!precio.HasValue)
+                {
+                    Mensaje = "El precio por hora es obligatorio para los psicólogos";
+                    return;
+                }
+
                 var psicologo = new Usuario
                 {
                     nombre = nombre,
@@ -95,52 +104,57 @@ namespace NearMindApp.ModelViews
                     password = password,
                     telefono = telefono,
                     rol = rol,
+                    ubicacion = ubicacion,
+                    precio = precio,
                     validado = false
                 };
-                // Llamar a Supabase para registrar al psicólogo
+
                 var resultadoPsicologo = await _supabaseClient.From<Usuario>().Insert(psicologo);
-                if (resultadoPsicologo.Models == null || !resultadoPsicologo.Models.Any())
+                if (resultadoPsicologo.Models?.Any() == true)
                 {
-                    mensaje = "No se pudo registrar al psicólogo.";
+                    Mensaje = "Psicólogo registrado correctamente y pendiente de validación.";
+                    await Task.Delay(1500);
+                    await Application.Current.MainPage.Navigation.PopAsync(); // Navega hacia atrás
                 }
                 else
                 {
-                    mensaje = "Psicólogo registrado correctamente.";
+                    Mensaje = "No se pudo registrar al psicólogo.";
                 }
             }
             else if (rol == "Paciente")
             {
-                // Crear paciente (hereda de Usuario)
                 var paciente = new Usuario
                 {
                     nombre = nombre,
                     email = email,
                     password = password,
                     telefono = telefono,
-                    rol = rol
+                    rol = rol,
+                    ubicacion = ubicacion
                 };
 
-                // Llamar a Supabase para registrar al paciente
                 var resultadoPaciente = await _supabaseClient.From<Usuario>().Insert(paciente);
-                if (resultadoPaciente.Models == null || !resultadoPaciente.Models.Any())
+                if (resultadoPaciente.Models?.Any() == true)
                 {
-                    mensaje = "No se pudo registrar al paciente.";
+                    Mensaje = "Paciente registrado correctamente.";
+                    await Task.Delay(1500);
+                    await Application.Current.MainPage.Navigation.PopAsync(); // Navega hacia atrás
                 }
                 else
                 {
-                    mensaje = "Paciente registrado correctamente.";
+                    Mensaje = "No se pudo registrar al paciente.";
                 }
             }
             else
             {
-                mensaje = "Rol no válido";
+                Mensaje = "Rol no válido";
             }
         }
 
         // Propiedad calculada para mostrar u ocultar el campo de especialidad según el rol
         partial void OnRolChanged(string value)
         {
-            isPsicologoSelected = value == "Psicólogo";
+            isPsicologoSelected = value == "Psicologo";
             OnPropertyChanged(nameof(IsPsicologoSelected));
         }
     }
@@ -149,5 +163,17 @@ namespace NearMindApp.ModelViews
     {
         public string Name { get; set; }
         public bool IsSelected { get; set; }
+    }
+    public class StringToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return !string.IsNullOrEmpty(value as string);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
