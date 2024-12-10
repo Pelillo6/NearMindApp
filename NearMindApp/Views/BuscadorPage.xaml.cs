@@ -6,6 +6,8 @@ namespace NearMindApp.Views;
 public partial class BuscadorPage : ContentPage
 {
     private SupabaseService _supabaseService;
+    private List<Usuario> _usuariosOriginales;
+    private List<Usuario> _usuariosFiltrados; 
 
     public BuscadorPage()
     {
@@ -31,6 +33,9 @@ public partial class BuscadorPage : ContentPage
             {
                 UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Psicologo").ToList();
             }
+            _usuariosOriginales = usuarios.Where(u => u.rol == "Psicologo").ToList();
+            _usuariosFiltrados = new List<Usuario>(_usuariosOriginales);
+            UsuariosCollectionView.ItemsSource = _usuariosFiltrados;
         }
         catch (Exception ex)
         {
@@ -45,6 +50,35 @@ public partial class BuscadorPage : ContentPage
             var usuario = UsuarioService.Instance.GetUsuarioActual();
             return usuario.rol == "Paciente" ? "Lista de Psicólogos" : "Lista de Pacientes";
         }
+    }
+
+    private void OnFiltroChanged(object sender, EventArgs e)
+    {
+
+        // Obtenemos los valores actuales de los filtros
+        string textoFiltro = SearchBarFiltro.Text?.ToLower() ?? string.Empty;
+        string filtroValoracion = PickerValoracion.SelectedItem?.ToString() ?? "Todos";
+
+        // Filtramos la lista
+        _usuariosFiltrados = _usuariosOriginales
+     .Where(u =>
+         u != null && // Validar que el objeto no sea nulo
+         (
+             // Filtro por nombre o ubicación
+             (!string.IsNullOrWhiteSpace(u.nombre) && u.nombre.ToLower().Contains(textoFiltro)) ||
+             (!string.IsNullOrWhiteSpace(u.ubicacion) && u.ubicacion.ToLower().Contains(textoFiltro))
+         ) &&
+         // Filtro por valoración
+         (filtroValoracion == "Todos" ||
+          (filtroValoracion == "9.0 o más" && (u.valoracion_media ?? 0) >= 9.0) ||
+          (filtroValoracion == "8.0 o más" && (u.valoracion_media ?? 0) >= 8.0) ||
+          (filtroValoracion == "7.0 o más" && (u.valoracion_media ?? 0) >= 7.0) ||
+          (filtroValoracion == "6.0 o más" && (u.valoracion_media ?? 0) >= 6.0))
+     )
+     .ToList();
+
+        // Actualizamos la vista
+        UsuariosCollectionView.ItemsSource = _usuariosFiltrados;
     }
 
     private async void OnUsuarioSeleccionado(object sender, SelectionChangedEventArgs e)

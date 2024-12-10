@@ -4,10 +4,29 @@
              x:Class="NearMindApp.Views.BuscadorPage"
              Title="Buscador"
              IconImageSource="search.svg">
+    
     <StackLayout Padding="10">
         <Label Text="{Binding ListaDeUsuariosTexto}" 
                FontSize="20" 
                HorizontalOptions="Center" />
+
+        <SearchBar x:Name="SearchBarFiltro" 
+                   Placeholder="Buscar por nombre o ubicación" 
+                   TextChanged="OnFiltroChanged" />
+
+        <Picker x:Name="PickerValoracion" 
+        Title="Filtrar por valoración" 
+        SelectedIndexChanged="OnFiltroChanged">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Todos</x:String>
+                    <x:String>9.0 o más</x:String>
+                    <x:String>8.0 o más</x:String>
+                    <x:String>7.0 o más</x:String>
+                    <x:String>6.0 o más</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
 
         <CollectionView x:Name="UsuariosCollectionView" 
                         SelectionMode="Single" 
@@ -17,6 +36,10 @@
                     <StackLayout Orientation="Horizontal" Padding="10">
                         <Label Text="{Binding nombre}" 
                                FontSize="16" 
+                               VerticalOptions="Center" />
+                        <Label Text="{Binding ubicacion}" 
+                               FontSize="14" 
+                               TextColor="Gray" 
                                VerticalOptions="Center" />
                     </StackLayout>
                 </DataTemplate>
