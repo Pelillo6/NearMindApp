@@ -80,7 +80,7 @@ public partial class ChatPage : ContentPage
 
             // Llamar al servicio para insertar la cita
             var supabaseService = new SupabaseService();
-            await supabaseService.InsertarElementoEnTabla(nuevaCita);
+            await supabaseService.InsertarElementoEnTabla<Cita>(nuevaCita);
 
             // Mostrar un mensaje de confirmación
             await DisplayAlert("Éxito", "La solicitud de cita se ha enviado correctamente.", "OK");
