@@ -85,5 +85,60 @@ namespace NearMindApp.Utilidades
 
             return messages.Select(m => m.Object).OrderBy(m => m.fechaHora).ToList();
         }
+
+        public async Task<List<Guid>> ObtenerConversacionesAsync(Guid usuarioId)
+        {
+            // Obtener todas las claves de las conversaciones
+            var conversaciones = await _firebaseClient
+                .Child("messages")
+                .OnceAsync<object>(); // Solo obtenemos las claves
+
+            var idsConversaciones = new List<Guid>();
+
+            foreach (var conversacion in conversaciones)
+            {
+                var claves = conversacion.Key.Split('_'); // Dividimos la clave de la conversación
+                if (claves.Length == 2)
+                {
+                    var id1 = Guid.Parse(claves[0]);
+                    var id2 = Guid.Parse(claves[1]);
+
+                    // Identificamos al otro usuario en la conversación
+                    var otroUsuarioId = id1 == usuarioId ? id2 : id1;
+                    if (!idsConversaciones.Contains(otroUsuarioId))
+                    {
+                        idsConversaciones.Add(otroUsuarioId);
+                    }
+                }
+            }
+
+            return idsConversaciones;
+        }
+        public void SubscribeToConversaciones(Guid usuarioId, Action<Guid> onNuevaConversacion)
+        {
+            _firebaseClient
+                .Child("messages")
+                .AsObservable<object>()
+                .Subscribe(d =>
+                {
+                    if (d.Key != null) // Cuando se detecta una nueva clave de conversación
+                    {
+                        var claves = d.Key.Split('_');
+                        if (claves.Length == 2)
+                        {
+                            var id1 = Guid.Parse(claves[0]);
+                            var id2 = Guid.Parse(claves[1]);
+
+                            // Verificar si el usuario está involucrado
+                            if (id1 == usuarioId || id2 == usuarioId)
+                            {
+                                var otroUsuarioId = id1 == usuarioId ? id2 : id1;
+                                onNuevaConversacion?.Invoke(otroUsuarioId);
+                            }
+                        }
+                    }
+                });
+        }
     }
 }
+
