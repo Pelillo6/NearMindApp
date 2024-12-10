@@ -28,15 +28,10 @@ namespace NearMindApp.Models
 
         [JsonPropertyName("nota")]
         public string nota { get; set; }
-        [JsonIgnore]
-        public bool EsDestinatario => UsuarioService.Instance.GetUsuarioActual().id == usuario2_id;
-
-
         public Cita()
         {
             id = Guid.NewGuid();
         }
-       
-
+        
     }
 }

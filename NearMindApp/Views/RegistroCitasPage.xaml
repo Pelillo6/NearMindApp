@@ -12,6 +12,9 @@
                         <Button Text="Aceptar"
                                 Clicked="OnAceptarCitaClicked"
                                 IsVisible="{Binding EsDestinatario}" />
+                        <Button Text="Denegar"
+                                Clicked="OnDenegarCitaClicked"
+                                IsVisible="{Binding EsDestinatario}" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
