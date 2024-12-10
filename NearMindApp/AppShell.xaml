@@ -14,6 +14,8 @@
         <ShellContent Icon="chat.svg" ContentTemplate="{DataTemplate views:ChatsListPage}" IsVisible="{Binding IsNotAdmin}"/>
         <ShellContent Icon="user.svg" ContentTemplate="{DataTemplate views:PerfilPage}" />
         <ShellContent Icon="settings.svg" ContentTemplate="{DataTemplate views:ConfiguracionPage}" IsVisible="{Binding IsAdmin}" />
+        <ShellContent Icon="registro_citas.svg" ContentTemplate="{DataTemplate views:RegistroCitasPage}" IsVisible="{Binding IsNotAdmin}" />
+        
     </TabBar>
 
 </Shell>
