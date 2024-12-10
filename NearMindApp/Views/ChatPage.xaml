@@ -19,7 +19,7 @@
         </CollectionView>
 
         <!-- Campo para seleccionar la fecha de la cita -->
-        <DatePicker x:Name="DatePicker" MinimumDate="{x:Static sys:DateTime.Now}" MaximumDate="{x:Static sys:DateTime.Now.AddYears(1)}" />
+        <DatePicker x:Name="DatePicker" />
 
         <!-- Botón para solicitar una cita -->
         <Button Text="Solicitar Cita" Clicked="OnSolicitarCitaClicked" BackgroundColor="#4CAF50" TextColor="White" />
@@ -30,6 +30,4 @@
             <Button Text="Enviar" Clicked="OnSendMessageClicked" />
         </StackLayout>
     </StackLayout>
-
-
 </ContentPage>
