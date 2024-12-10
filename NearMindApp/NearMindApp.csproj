@@ -83,6 +83,9 @@
 	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\RegistroCitasPage.xaml.cs">
+	    <DependentUpon>RegistroCitasPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\RegistroPage.xaml.cs">
 	    <DependentUpon>RegistroPage.xaml</DependentUpon>
 	  </Compile>
@@ -108,6 +111,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RegistroCitasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegistroPage.xaml">
