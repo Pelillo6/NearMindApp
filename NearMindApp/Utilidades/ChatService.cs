@@ -13,6 +13,7 @@ namespace NearMindApp.Utilidades
     {
         private readonly FirebaseClient _firebaseClient;
         private const string FirebaseUrl = "https://nearmind-pin2024-default-rtdb.europe-west1.firebasedatabase.app/"; // URL de la Firebase Realtime Database
+        private bool isSubscribed = false;
 
         public ObservableCollection<Message> Messages { get; set; }
 
@@ -34,13 +35,15 @@ namespace NearMindApp.Utilidades
 
         public async Task SendMessageAsync(Guid emisorId, Guid receptorId, string text)
         {
+            var usuario = await UsuarioService.Instance.ObtenerUsuarioPorId(emisorId);
             var message = new Message
             {
                 id = Guid.NewGuid(),
                 emisorId = emisorId,
                 receptorId = receptorId,
                 texto = text,
-                fechaHora = DateTime.UtcNow
+                fechaHora = DateTime.UtcNow,
+                NombreEmisor = usuario.nombre
             };
 
             string conversationKey = GenerateConversationKey(emisorId, receptorId);
@@ -53,6 +56,10 @@ namespace NearMindApp.Utilidades
 
         public async Task SubscribeToMessagesAsync(Guid emisorId, Guid receptorId, ObservableCollection<Message> messages)
         {
+
+            if (isSubscribed) return; // Evita suscripciones duplicadas
+            isSubscribed = true;
+
             string conversationKey = GenerateConversationKey(emisorId, receptorId);
 
             _firebaseClient
@@ -61,7 +68,7 @@ namespace NearMindApp.Utilidades
             .AsObservable<Message>()
             .Subscribe(d =>
             {
-                if (d.Object != null)
+                if (d.Object != null && !messages.Any(m => m.id == d.Object.id))
                     messages.Add(d.Object);
             });
         }
