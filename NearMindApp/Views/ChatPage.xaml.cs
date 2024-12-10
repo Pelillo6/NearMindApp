@@ -57,4 +57,79 @@ public partial class ChatPage : ContentPage
             MessageEntry.Text = string.Empty;
         }
     }
+    private async void OnSolicitarCitaClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            // Mostrar un selector de fecha
+            var fechaSeleccionada = await MostrarSelectorDeFecha();
+            if (fechaSeleccionada == null)
+            {
+                await DisplayAlert("Aviso", "No se seleccionó una fecha.", "OK");
+                return;
+            }
+
+            // Crear un nuevo objeto de cita
+            var nuevaCita = new Cita
+            {
+                usuario1_id = _usuarioEmisor.id, // ID del usuario actual (emisor)
+                usuario2_id = _usuarioDestino.id, // ID del destinatario
+                fecha = fechaSeleccionada.Value, // Fecha seleccionada
+                nota = $"Solicitud de cita de {_usuarioEmisor.nombre}"
+            };
+
+            // Llamar al servicio para insertar la cita
+            var supabaseService = new SupabaseService();
+            await supabaseService.InsertarElementoEnTabla(nuevaCita);
+
+            // Mostrar un mensaje de confirmación
+            await DisplayAlert("Éxito", "La solicitud de cita se ha enviado correctamente.", "OK");
+        }
+        catch (Exception ex)
+        {
+            // Mostrar un mensaje de error
+            await DisplayAlert("Error", $"No se pudo solicitar la cita: {ex.Message}", "OK");
+        }
+    }
+    private async Task<DateTime?> MostrarSelectorDeFecha()
+    {
+        var tcs = new TaskCompletionSource<DateTime?>();
+
+        var picker = new DatePicker
+        {
+            MinimumDate = DateTime.Now,
+            MaximumDate = DateTime.Now.AddYears(1)
+        };
+
+        var aceptar = new Button { Text = "Aceptar" };
+        aceptar.Clicked += (s, e) => tcs.TrySetResult(picker.Date);
+
+        var cancelar = new Button { Text = "Cancelar" };
+        cancelar.Clicked += (s, e) => tcs.TrySetResult(null);
+
+        var layout = new StackLayout
+        {
+            Padding = 10,
+            Children = { picker, aceptar, cancelar }
+        };
+
+        var page = new ContentPage
+        {
+            Content = layout
+        };
+
+        await Navigation.PushModalAsync(page);
+        var resultado = await tcs.Task;
+        await Navigation.PopModalAsync();
+        return resultado;
+    }
+
+
+
+
+
+
+
+
+
 }

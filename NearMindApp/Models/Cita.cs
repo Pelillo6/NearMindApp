@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Supabase.Postgrest.Models;
-
+using NearMindApp.Services;
 namespace NearMindApp.Models
 {
     public class Cita : BaseModel
@@ -28,10 +28,15 @@ namespace NearMindApp.Models
 
         [JsonPropertyName("nota")]
         public string nota { get; set; }
+        [JsonIgnore]
+        public bool EsDestinatario => UsuarioService.Instance.GetUsuarioActual().id == usuario2_id;
+
 
         public Cita()
         {
             id = Guid.NewGuid();
         }
+       
+
     }
 }

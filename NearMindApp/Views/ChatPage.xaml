@@ -18,10 +18,18 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <!-- Campo para seleccionar la fecha de la cita -->
+        <DatePicker x:Name="DatePicker" MinimumDate="{x:Static sys:DateTime.Now}" MaximumDate="{x:Static sys:DateTime.Now.AddYears(1)}" />
+
+        <!-- Botón para solicitar una cita -->
+        <Button Text="Solicitar Cita" Clicked="OnSolicitarCitaClicked" BackgroundColor="#4CAF50" TextColor="White" />
+
         <!-- Campo de entrada para enviar mensajes -->
         <StackLayout Orientation="Horizontal">
             <Entry x:Name="MessageEntry" Placeholder="Escribe un mensaje" HorizontalOptions="FillAndExpand" />
             <Button Text="Enviar" Clicked="OnSendMessageClicked" />
         </StackLayout>
     </StackLayout>
+
+
 </ContentPage>
