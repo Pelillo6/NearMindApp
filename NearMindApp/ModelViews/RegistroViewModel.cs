@@ -9,13 +9,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using NearMindApp.Models;
 using Supabase;
+using NearMindApp.Services;
 using Supabase.Interfaces;
 
 namespace NearMindApp.ModelViews
 {
     public partial class RegistroViewModel : ObservableObject
     {
-        private readonly Client _supabaseClient;
+        private SupabaseService _supabaseService;
 
         // Propiedades de la vista
         [ObservableProperty]
@@ -76,7 +77,7 @@ namespace NearMindApp.ModelViews
 
         public RegistroViewModel()
         {
-            _supabaseClient = new Client("https://ypjbezsniccydiqdhnvs.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwamJlenNuaWNjeWRpcWRobnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk4NzUwMjEsImV4cCI6MjA0NTQ1MTAyMX0.VJiINPZnNn9NCaCQrHwwUe51MCitZl-gT4AjI5nPhJw");
+            _supabaseService = new SupabaseService();
             RegistrarCommand = new AsyncRelayCommand(RegistrarAsync);
         }
 
@@ -108,8 +109,8 @@ namespace NearMindApp.ModelViews
                     precio = precio,
                     validado = false
                 };
-
-                var resultadoPsicologo = await _supabaseClient.From<Usuario>().Insert(psicologo);
+                
+                var resultadoPsicologo = await _supabaseService.GetClient().From<Usuario>().Insert(psicologo);
                 if (resultadoPsicologo.Models?.Any() == true)
                 {
                     Mensaje = "Psicólogo registrado correctamente y pendiente de validación.";
@@ -133,7 +134,7 @@ namespace NearMindApp.ModelViews
                     ubicacion = ubicacion
                 };
 
-                var resultadoPaciente = await _supabaseClient.From<Usuario>().Insert(paciente);
+                var resultadoPaciente = await _supabaseService.GetClient().From<Usuario>().Insert(paciente);
                 if (resultadoPaciente.Models?.Any() == true)
                 {
                     Mensaje = "Paciente registrado correctamente.";

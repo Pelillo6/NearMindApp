@@ -7,10 +7,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Supabase.Postgrest.Models;
 using NearMindApp.Services;
+using Supabase.Postgrest.Attributes;
 namespace NearMindApp.Models
 {
     public class Cita : BaseModel
     {
+        [PrimaryKey]
         [JsonPropertyName("id")]
         public Guid id { get; set; }
 

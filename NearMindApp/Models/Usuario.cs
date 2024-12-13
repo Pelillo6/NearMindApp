@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Supabase.Postgrest.Models;
+using Supabase.Postgrest.Attributes;
 
 namespace NearMindApp.Models
 {
     public class Usuario : BaseModel
     {
+        [PrimaryKey]
         [JsonPropertyName("id")]
         public Guid id { get; set; }
 

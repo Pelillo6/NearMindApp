@@ -6,11 +6,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Supabase.Postgrest.Models;
 using System.Threading.Tasks;
+using Supabase.Postgrest.Attributes;
 
 namespace NearMindApp.Models
 {
     public class Sesion
     {
+        [PrimaryKey]
         [JsonPropertyName("id")]
         public Guid id { get; set; }
         [Required]

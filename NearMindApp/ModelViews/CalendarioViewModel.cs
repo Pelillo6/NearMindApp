@@ -14,17 +14,16 @@ namespace NearMindApp.ModelViews
     public partial class CalendarioViewModel : ObservableObject
     {
         public ObservableCollection<DiaCalendario> DiasDelMes { get; set; } = new ObservableCollection<DiaCalendario>();
-
+        private SupabaseService _supabaseService;
         [ObservableProperty]
         private DiaCalendario diaSeleccionado;
 
         public CalendarioViewModel()
         {
-            _supabaseClient = new Client("https://ypjbezsniccydiqdhnvs.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwamJlenNuaWNjeWRpcWRobnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk4NzUwMjEsImV4cCI6MjA0NTQ1MTAyMX0.VJiINPZnNn9NCaCQrHwwUe51MCitZl-gT4AjI5nPhJw");
+            _supabaseService = new SupabaseService();
             CargarCitasAsync();
         }
 
-        private Client _supabaseClient;
         private void GenerarDiasDelMes(Dictionary<DateTime, string> citas)
         {
             DiasDelMes.Clear();
@@ -48,7 +47,7 @@ namespace NearMindApp.ModelViews
         {
             var usuarioId = UsuarioService.Instance.GetUsuarioActual().id;
 
-            var resultado = await _supabaseClient.From<Cita>()
+            var resultado = await _supabaseService.GetClient().From<Cita>()
                 .Where(c => c.usuario1_id == usuarioId || c.usuario2_id == usuarioId)
                 .Get();
 
