@@ -29,6 +29,8 @@ public partial class PerfilPage : ContentPage
         }
     }
 
+    private async void OnChangeProfileImageClicked(object sender, EventArgs e) { }
+
     private async void OnGuardarCambiosClicked(object sender, EventArgs e)
     {
         // Validar los campos

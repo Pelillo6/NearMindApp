@@ -1,11 +1,8 @@
-<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: none;
-      }
-    </style>
-  </defs>
-  <path d="M26,4H22V2H20V4H12V2H10V4H6A2.0025,2.0025,0,0,0,4,6V26a2.0025,2.0025,0,0,0,2,2H26a2.0025,2.0025,0,0,0,2-2V6A2.0025,2.0025,0,0,0,26,4ZM6,6h4V8h2V6h8V8h2V6h4l0,4H6Zm0,6h5v6H6ZM19,26H13V20h6Zm0-8H13V12h6Zm2,8V20h5l.0012,6Z"/>
-  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Calendario">
+<path id="Vector" d="M5.11111 5.5H26.8889C27.7787 5.5 28.5 6.22132 28.5 7.11111V28.8889C28.5 29.7787 27.7787 30.5 26.8889 30.5H5.11111C4.22132 30.5 3.5 29.7787 3.5 28.8889V7.11111C3.5 6.22132 4.22132 5.5 5.11111 5.5Z" stroke="#53518C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<line id="Line 1" x1="5" y1="14.5" x2="27" y2="14.5" stroke="#53518C" stroke-width="3"/>
+<path id="Line 2" d="M10.5 8L10.5 3" stroke="#53518C" stroke-width="3" stroke-linecap="round"/>
+<path id="Line 3" d="M21.5 8V3" stroke="#53518C" stroke-width="3" stroke-linecap="round"/>
+</g>
 </svg>

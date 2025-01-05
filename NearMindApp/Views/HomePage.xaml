@@ -1,0 +1,48 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NearMindApp.Views.HomePage"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid >
+        <Image Source="fondo_home.png"
+               Aspect="AspectFill"
+               Opacity="0.8" />
+
+        <Frame BackgroundColor="White"
+               CornerRadius="20"
+               Padding="20"
+               Margin="30"
+               HasShadow="True"
+               VerticalOptions="Center">
+            
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                
+                <Label Text="NearMind"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#53518C"/>
+
+                <Label Text="Un paso más cerca del cuidado que tu mente necesita."
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       TextColor="#53518C"
+                       Margin="0,0,0,10"/>
+
+               <Button Text="Paciente"
+                        Clicked="OnLoginPacienteButtonClicked"
+                        BackgroundColor="#6F6CCB"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="10,5" />
+
+                <Button Text="Profesional"
+                        Clicked="OnLoginProfesionalButtonClicked"
+                        BackgroundColor="#ED8A6C"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Padding="10,5" />
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

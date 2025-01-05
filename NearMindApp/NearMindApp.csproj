@@ -47,7 +47,6 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -57,8 +56,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="ModelViews\RegistroViewModel.cs" />
+	  <Compile Remove="Views\LoginPageProfesional.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\dotnet_bot.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Views\LoginPageProfesional.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Images\calendar.svg" />
 	  <None Remove="Resources\Images\chat.svg" />
+	  <None Remove="Resources\Images\dotnet_bot.png" />
+	  <None Remove="Resources\Images\edit.svg" />
+	  <None Remove="Resources\Images\fondo_home.png" />
 	  <None Remove="Resources\Images\search.svg" />
 	  <None Remove="Resources\Images\settings.svg" />
 	  <None Remove="Resources\Images\user.svg" />
@@ -86,8 +101,14 @@
 	  <Compile Update="Views\RegistroCitasPage.xaml.cs">
 	    <DependentUpon>RegistroCitasPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\RegistroPage.xaml.cs">
-	    <DependentUpon>RegistroPage.xaml</DependentUpon>
+	  <Compile Update="Views\RegistroPsicologoPage.xaml.cs">
+	    <DependentUpon>RegistroPsicologoPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\RegistroProfesionalPage.xaml.cs">
+	    <DependentUpon>RegistroProfesionalPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\RegistroPacientePage.xaml.cs">
+	    <DependentUpon>RegistroPacientePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -110,13 +131,22 @@
 	  <MauiXaml Update="Views\ConfiguracionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegistroCitasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\RegistroPage.xaml">
+	  <MauiXaml Update="Views\RegistroPsicologoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RegistroProfesionalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RegistroPacientePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PerfilPage.xaml">

@@ -2,31 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NearMindApp.Views.PerfilPage"
-             Title="Perfil"
+             NavigationPage.HasNavigationBar="False"
              IconImageSource="user.svg">
-    <ScrollView>
-        <StackLayout Padding="20" Spacing="15">
-            <Label Text="Perfil de Usuario"
-                   FontSize="24"
-                   HorizontalOptions="Center" />
+    <StackLayout Padding="20" Spacing="15">
+        <Label Text="NearMind"
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#53518C"/>
 
-            <!-- Nombre -->
-            <Label Text="Nombre:" />
-            <Entry x:Name="NombreEntry" Placeholder="Nombre" />
+        <Grid VerticalOptions="Center" HorizontalOptions="Center" ColumnDefinitions="Auto,Auto">
+            <Frame HeightRequest="100"
+                   WidthRequest="100"
+                   CornerRadius="50"
+                   Padding="20"
+                   BackgroundColor="#D3CFEE">
+                <Image x:Name="ImagenPerfil"
+                       Source="user.svg"
+                       Aspect="AspectFill"/>
+            </Frame>
+            <Button ImageSource="edit.svg"
+                    Clicked="OnChangeProfileImageClicked"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Start"
+                    Padding="12"
+                    CornerRadius="20"
+                    Margin="-20,0,0,0"
+                    Grid.Column="1"
+                    BackgroundColor="#D3CFEE"/>
+        </Grid>
+        
+        <Label Text="Nombre:" />
+        <Entry x:Name="NombreEntry" Placeholder="Nombre" />
 
-            <!-- Correo -->
-            <Label Text="Correo Electrónico:" />
-            <Entry x:Name="CorreoEntry" Placeholder="Correo Electrónico" Keyboard="Email" />
+        <Label Text="Correo Electrónico:" />
+        <Entry x:Name="CorreoEntry" Placeholder="Correo Electrónico" Keyboard="Email" />
 
-            <!-- Contraseña -->
-            <Label Text="Contraseña:" />
-            <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" />
+        <Label Text="Contraseña:" />
+        <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" />
 
-            <!-- Botón para guardar -->
-            <Button Text="Guardar Cambios" Clicked="OnGuardarCambiosClicked" />
+        <Button Text="Guardar Cambios" Clicked="OnGuardarCambiosClicked" />
 
-            <!-- Mensaje de error o éxito -->
-            <Label x:Name="MensajeLabel" TextColor="Green" IsVisible="False" HorizontalOptions="Center" />
-        </StackLayout>
-    </ScrollView>
+        <Label x:Name="MensajeLabel" TextColor="Green" IsVisible="False" HorizontalOptions="Center" />
+    </StackLayout>
 </ContentPage>

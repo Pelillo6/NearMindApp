@@ -53,6 +53,8 @@ namespace NearMindApp.Models
         public string ubicacion { get; set; }
         [JsonPropertyName("valoracion_media")]
         public double? valoracion_media { get; set; }
+        [JsonPropertyName("descripcion")]
+        public string descripcion { get; set; }
         public Usuario()
         {
             id = Guid.NewGuid();

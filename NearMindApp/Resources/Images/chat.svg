@@ -1,1 +1,5 @@
-<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>chat</title><path d="M17.74,30,16,29l4-7h6a2,2,0,0,0,2-2V8a2,2,0,0,0-2-2H6A2,2,0,0,0,4,8V20a2,2,0,0,0,2,2h9v2H6a4,4,0,0,1-4-4V8A4,4,0,0,1,6,4H26a4,4,0,0,1,4,4V20a4,4,0,0,1-4,4H21.16Z" transform="translate(0 0)"/><rect x="8" y="10" width="16" height="2"/><rect x="8" y="16" width="10" height="2"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Chats">
+<path id="Vector" d="M2.73725 27.5719C2.57433 28.0526 2.69836 28.584 3.05719 28.9428C3.41603 29.3016 3.94745 29.4257 4.42805 29.2628L11.3604 26.9128C13.9276 28.0856 16.8185 28.3718 19.575 27.716C22.519 27.0156 25.1161 25.2867 26.8982 22.8409C28.6803 20.3951 29.5302 17.3932 29.2949 14.3762C29.0595 11.3592 27.7543 8.52541 25.6144 6.38556C23.4746 4.24572 20.6408 2.94051 17.6238 2.70514C14.6068 2.46978 11.6049 3.31972 9.15907 5.10183C6.71326 6.88393 4.98438 9.48099 4.28397 12.425C3.62819 15.1815 3.91437 18.0724 5.0872 20.6396L2.73725 27.5719Z" stroke="#53518C" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

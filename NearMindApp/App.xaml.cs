@@ -8,7 +8,7 @@ namespace NearMindApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new HomePage());
         }
 
         public void MostrarAppShell()
