@@ -4,45 +4,167 @@
              x:Class="NearMindApp.Views.PerfilPage"
              NavigationPage.HasNavigationBar="False"
              IconImageSource="user.svg">
-    <StackLayout Padding="20" Spacing="15">
-        <Label Text="NearMind"
-               FontSize="18"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"
-               TextColor="#53518C"/>
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
 
-        <Grid VerticalOptions="Center" HorizontalOptions="Center" ColumnDefinitions="Auto,Auto">
-            <Frame HeightRequest="100"
-                   WidthRequest="100"
-                   CornerRadius="50"
-                   Padding="20"
-                   BackgroundColor="#D3CFEE">
-                <Image x:Name="ImagenPerfil"
+            <Label Text="NearMind"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#53518C"
+                   Margin="10"/>
+
+            <Grid VerticalOptions="Center" HorizontalOptions="Center" ColumnDefinitions="Auto,Auto,Auto">
+                <Image Source="vector_foto_perfil.svg"
+                       Aspect="AspectFill"
+                       Opacity="0.8" 
+                       Margin="35,0,0,0"/>
+                <Frame HeightRequest="105"
+                       WidthRequest="105"
+                       CornerRadius="50"
+                       Padding="0"
+                       Margin="35,0,45,0">
+                    <Image x:Name="ImagenPerfil"
                        Source="user.svg"
                        Aspect="AspectFill"/>
+                </Frame>
+                <Button ImageSource="edit.svg"
+                        Clicked="OnChangeProfileImageClicked"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="End"
+                        CornerRadius="50"
+                        Padding="0"
+                        Margin="0,0,10,0"
+                        BackgroundColor="Transparent"/>
+            </Grid>
+
+            <Label Text="Información básica"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#53518C"/>
+
+            <Label Text="Nombre completo"
+                   TextColor="#9792C5"
+                   Margin="5,0,0,-25"
+                   FontSize="14"/>
+            <Entry x:Name="Nombre"
+                   Margin="0,0,0,0"
+                   FontSize="16"
+                   TextColor="#53518C"
+                   FontAttributes="Bold"
+                   IsEnabled="False"/>
+
+            <Label Text="Fecha de nacimiento"
+                   TextColor="#53518C"
+                   Margin="5,0,0,-25"  
+                   FontSize="14"/>
+
+            <DatePicker x:Name="FecNacimiento"
+                        Format="dd/MM/yyyy" 
+                        Margin="0,0,0,0"
+                        TextColor="#53518C"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        IsEnabled="False"/>
+       
+            <Label Text="Telefono"
+                   TextColor="#9792C5"
+                   Margin="5,0,0,-25"   
+                   FontSize="14"/>
+            <Entry x:Name="Telefono"
+                   FontSize="16"
+                   TextColor="#53518C"
+                   FontAttributes="Bold"
+                   IsEnabled="False"/>
+
+            <Label Text="Ubicacion"
+                   TextColor="#9792C5"
+                   Margin="5,0,0,-25"   
+                   FontSize="14"/>
+            <Entry x:Name="Ubicacion"
+                    FontSize="16"
+                    TextColor="#53518C"
+                    FontAttributes="Bold"
+                   IsEnabled="False"/>
+
+            <Label Text="Correo electronico"
+                   TextColor="#9792C5"
+                   Margin="5,0,0,-25"   
+                   FontSize="14"/>
+            <Entry x:Name="Correo"
+                   FontSize="16"
+                   TextColor="#53518C"
+                   FontAttributes="Bold"
+                   IsEnabled="False"/>
+
+            <Label Text="Contraseña"
+                   TextColor="#9792C5"
+                   Margin="5,0,0,-25"   
+                   FontSize="14"/>
+            <Entry x:Name="Contra"
+                   FontSize="16"
+                   TextColor="#53518C"
+                   FontAttributes="Bold"
+                   IsEnabled="False"
+                   IsPassword="True"/>
+
+            <Label x:Name="EspecialidadLabel"
+                   TextColor="#9792C5"
+                   Text="Especialidad"
+                   Margin="5,0,0,-25"   
+                   FontSize="14"/>
+            <Entry x:Name="Especialidad"
+                   FontSize="16"
+                   TextColor="#53518C"
+                   FontAttributes="Bold"
+                   IsEnabled="False"/>
+
+            <Label x:Name="PrecioLabel"
+                   TextColor="#9792C5"
+                   Text="Precio por sesión"
+                   Margin="5,0,0,-25"   
+                   FontSize="14"/>
+            <Entry x:Name="Precio"
+                   FontSize="16"
+                   TextColor="#53518C"
+                   FontAttributes="Bold"
+                   IsEnabled="False"/>
+
+            <Label x:Name="DescripcionLabel"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#53518C"/>
+            <Frame BorderColor="#6F6CCB" 
+                   CornerRadius="10" 
+                   Padding="0,0,0,-10"
+                   HeightRequest="150">
+                <Editor x:Name="Descripcion"
+                        VerticalOptions="FillAndExpand"
+                        TextColor="#53518C"
+                        PlaceholderColor="#D3CFEE"
+                        IsEnabled="False"/>
             </Frame>
-            <Button ImageSource="edit.svg"
-                    Clicked="OnChangeProfileImageClicked"
-                    VerticalOptions="Center" 
-                    HorizontalOptions="Start"
-                    Padding="12"
-                    CornerRadius="20"
-                    Margin="-20,0,0,0"
-                    Grid.Column="1"
-                    BackgroundColor="#D3CFEE"/>
-        </Grid>
-        
-        <Label Text="Nombre:" />
-        <Entry x:Name="NombreEntry" Placeholder="Nombre" />
 
-        <Label Text="Correo Electrónico:" />
-        <Entry x:Name="CorreoEntry" Placeholder="Correo Electrónico" Keyboard="Email" />
+            <Label x:Name="MensajeLabel" 
+                   TextColor="Green" 
+                   IsVisible="False" 
+                   HorizontalOptions="Center" />
+            
+            <Button x:Name="BtnGuardar"
+                    Text="Guardar Cambios" 
+                    Clicked="OnGuardarCambiosClicked" 
+                    WidthRequest="200"
+                    IsVisible="False"
+                    BackgroundColor="#6F6CCB"/>
 
-        <Label Text="Contraseña:" />
-        <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" />
+            <Button x:Name="BtnEditar"
+                    Text="Editar" 
+                    Clicked="OnEditarClicked" 
+                    WidthRequest="150"
+                    BackgroundColor="#ED8A6C"/>
 
-        <Button Text="Guardar Cambios" Clicked="OnGuardarCambiosClicked" />
+            
 
-        <Label x:Name="MensajeLabel" TextColor="Green" IsVisible="False" HorizontalOptions="Center" />
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

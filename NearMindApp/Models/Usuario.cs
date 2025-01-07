@@ -55,10 +55,15 @@ namespace NearMindApp.Models
         public double? valoracion_media { get; set; }
         [JsonPropertyName("descripcion")]
         public string descripcion { get; set; }
+        [JsonPropertyName("imagen_perfil")]
+        public string imagen_perfil { get; set; }
         public Usuario()
         {
             id = Guid.NewGuid();
             historial = new List<Cita>();
+        }
+        public bool isPsicologo() {
+            return rol == "Psicologo";
         }
     }
 }
