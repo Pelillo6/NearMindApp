@@ -6,15 +6,17 @@
              IconImageSource="user.svg">
     <ScrollView>
         <StackLayout Padding="20" Spacing="15">
+            <Grid VerticalOptions="Center">
+                <Label Text="NearMind"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#53518C"
+                       Margin="10"/>
+                
+            </Grid>
 
-            <Label Text="NearMind"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="#53518C"
-                   Margin="10"/>
-
-            <Grid VerticalOptions="Center" HorizontalOptions="Center" ColumnDefinitions="Auto,Auto,Auto">
+            <Grid VerticalOptions="Center" HorizontalOptions="Center">
                 <Image Source="vector_foto_perfil.svg"
                        Aspect="AspectFill"
                        Opacity="0.8" 
@@ -25,7 +27,7 @@
                        Padding="0"
                        Margin="35,0,45,0">
                     <Image x:Name="ImagenPerfil"
-                       Source="user.svg"
+                       Source="anonimo.svg"
                        Aspect="AspectFill"/>
                 </Frame>
                 <Button ImageSource="edit.svg"
@@ -160,10 +162,13 @@
             <Button x:Name="BtnEditar"
                     Text="Editar" 
                     Clicked="OnEditarClicked" 
-                    WidthRequest="150"
+                    WidthRequest="100"
                     BackgroundColor="#ED8A6C"/>
-
-            
+            <Button x:Name="BtnLogout" 
+                    Text="Cerrar sesión"
+                    Clicked="OnLogoutClicked" 
+                    WidthRequest="150"
+                    BackgroundColor="#6F6CCB"/>
 
         </StackLayout>
     </ScrollView>

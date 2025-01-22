@@ -181,6 +181,7 @@ public partial class PerfilPage : ContentPage
             Especialidad.IsEnabled = false;
             Precio.IsEnabled = false;
             FecNacimiento.IsEnabled = false;
+            Descripcion.IsEnabled = false;
             BtnGuardar.IsVisible = false;
             BtnEditar.IsVisible = true;
 
@@ -198,6 +199,7 @@ public partial class PerfilPage : ContentPage
     }
 
     private async void OnEditarClicked(object sender, EventArgs e) {
+        MensajeLabel.IsVisible = false;
         Nombre.IsEnabled = true;
         Telefono.IsEnabled = true;
         Ubicacion.IsEnabled = true;
@@ -206,7 +208,25 @@ public partial class PerfilPage : ContentPage
         Especialidad.IsEnabled = true;
         Precio.IsEnabled = true;
         FecNacimiento.IsEnabled = true;
+        Descripcion.IsEnabled = true;
         BtnGuardar.IsVisible = true;
         BtnEditar.IsVisible = false;
     }
+
+    private async void OnLogoutClicked(object sender, EventArgs e)
+    {
+        bool confirmLogout = await DisplayAlert(
+        "Cerrar sesión",
+        "¿Estás seguro de que deseas cerrar sesión?", 
+        "Sí",
+        "No"
+    );
+
+        if (confirmLogout)
+        {
+            UsuarioService.Instance.SetUsuarioActual(null);
+            Application.Current.MainPage = new NavigationPage(new HomePage());
+        }
+    }
+    
 }

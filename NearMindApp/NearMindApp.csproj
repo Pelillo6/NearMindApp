@@ -62,6 +62,7 @@
 
 	<ItemGroup>
 	  <MauiImage Remove="Resources\Images\dotnet_bot.png" />
+	  <MauiImage Remove="Resources\Images\logout.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,11 +70,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\anonimo.svg" />
 	  <None Remove="Resources\Images\calendar.svg" />
 	  <None Remove="Resources\Images\chat.svg" />
 	  <None Remove="Resources\Images\dotnet_bot.png" />
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\fondo_home.png" />
+	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\search.svg" />
 	  <None Remove="Resources\Images\settings.svg" />
 	  <None Remove="Resources\Images\user.svg" />
