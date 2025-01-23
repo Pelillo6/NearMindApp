@@ -10,5 +10,8 @@ namespace NearMindApp.Models
     {
         public Guid UsuarioId { get; set; }
         public string NombreUsuario { get; set; }
+        public string ImagenPerfil { get; set; }
+        public string UltimoMensaje { get; set; }
+        public DateTime FechaUltimoMensaje { get; set; }
     }
 }

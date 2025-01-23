@@ -25,30 +25,15 @@ public partial class BuscadorPage : ContentPage
             var usuario = UsuarioService.Instance.GetUsuarioActual();
 
             // Filtrar la lista según el rol
-            if (usuario.rol == "Psicologo")
-            {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Paciente").ToList();
-            }
-            else if (usuario.rol == "Paciente")
+            if (usuario.rol == "Paciente")
             {
                 UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Psicologo").ToList();
             }
-            _usuariosOriginales = usuarios.Where(u => u.rol == "Psicologo").ToList();
-            _usuariosFiltrados = new List<Usuario>(_usuariosOriginales);
-            UsuariosCollectionView.ItemsSource = _usuariosFiltrados;
+            
         }
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"No se pudieron cargar los usuarios: {ex.Message}", "OK");
-        }
-    }
-
-    public string ListaDeUsuariosTexto
-    {
-        get
-        {
-            var usuario = UsuarioService.Instance.GetUsuarioActual();
-            return usuario.rol == "Paciente" ? "Lista de Psicólogos" : "Lista de Pacientes";
         }
     }
 
@@ -79,22 +64,6 @@ public partial class BuscadorPage : ContentPage
 
         // Actualizamos la vista
         UsuariosCollectionView.ItemsSource = _usuariosFiltrados;
-    }
-
-    private async void OnUsuarioSeleccionado(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection.FirstOrDefault() is Usuario usuarioSeleccionado)
-        {
-            string detalles = $"Nombre: {usuarioSeleccionado.nombre}\n" +
-                              $"Email: {usuarioSeleccionado.email}\n" +
-                              $"Teléfono: {usuarioSeleccionado.telefono}\n";
-
-            if (UsuarioService.Instance.GetUsuarioActual().rol == "Paciente") {
-                detalles += $"Especialidad: {usuarioSeleccionado.especialidad} \n"; 
-            }
-
-            await DisplayAlert("Detalles del Usuario", detalles, "Cerrar");
-        }
     }
 
     private async void OnUsuarioSelected(object sender, SelectionChangedEventArgs e)

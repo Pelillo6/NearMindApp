@@ -4,6 +4,8 @@ using NearMindApp.Models;
 using NearMindApp.Utilidades;
 using NearMindApp.Services;
 using System.Collections.ObjectModel;
+using Supabase.Storage;
+using System.Net.Sockets;
 
 namespace NearMindApp.Views
 {
@@ -11,7 +13,7 @@ namespace NearMindApp.Views
     {
         private Usuario _usuarioActual;
         private readonly ChatService _chatService;
-
+        private SupabaseService _supabaseService;
         public ObservableCollection<ChatItem> Chats { get; set; }
 
         public ChatsListPage()
@@ -20,9 +22,9 @@ namespace NearMindApp.Views
             _usuarioActual = UsuarioService.Instance.GetUsuarioActual();
             _chatService = new ChatService();
             Chats = new ObservableCollection<ChatItem>();
-
+            _supabaseService = new SupabaseService();
             ChatsListView.ItemsSource = Chats;
-
+            
             CargarChats();
 
             _chatService.SubscribeToConversaciones(_usuarioActual.id, OnNuevaConversacion);
@@ -32,19 +34,23 @@ namespace NearMindApp.Views
         {
             // Obtener las claves de las conversaciones
             var conversaciones = await _chatService.ObtenerConversacionesAsync(_usuarioActual.id);
+            var storage = _supabaseService.GetClient().Storage;
+            var bucket = storage.From("imagenes-perfil");
 
             Chats.Clear();
             foreach (var conversacion in conversaciones)
             {
                 var usuarioId = conversacion; // ID del usuario con el que se conversa
                 var usuario = await UsuarioService.Instance.ObtenerUsuarioPorId(usuarioId);
-
+                
                 if (usuario != null)
                 {
+                    var imagenPerfilUrl = !string.IsNullOrEmpty(usuario.imagen_perfil) ? bucket.GetPublicUrl(usuario.imagen_perfil) : "anonimo.svg";
                     Chats.Add(new ChatItem
                     {
                         UsuarioId = usuarioId,
-                        NombreUsuario = usuario.nombre
+                        NombreUsuario = usuario.nombre,
+                        ImagenPerfil = imagenPerfilUrl
                     });
                 }
             }
@@ -64,17 +70,22 @@ namespace NearMindApp.Views
 
         private async void OnNuevaConversacion(Guid usuarioId)
         {
-            // Evitar duplicados
+            var storage = _supabaseService.GetClient().Storage;
+            var bucket = storage.From("imagenes-perfil");
+
             if (Chats.Any(c => c.UsuarioId == usuarioId))
                 return;
 
             var usuario = await UsuarioService.Instance.ObtenerUsuarioPorId(usuarioId);
             if (usuario != null)
             {
+                var imagenPerfilUrl = !string.IsNullOrEmpty(usuario.imagen_perfil) ? bucket.GetPublicUrl(usuario.imagen_perfil) : "anonimo.svg";
+
                 Chats.Add(new ChatItem
                 {
                     UsuarioId = usuarioId,
-                    NombreUsuario = usuario.nombre
+                    NombreUsuario = usuario.nombre,
+                    ImagenPerfil = imagenPerfilUrl
                 });
             }
         }

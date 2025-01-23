@@ -124,12 +124,4 @@ public partial class ChatPage : ContentPage
         return resultado;
     }
 
-
-
-
-
-
-
-
-
 }
