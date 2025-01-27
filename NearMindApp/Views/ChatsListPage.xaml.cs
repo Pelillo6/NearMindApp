@@ -46,11 +46,15 @@ namespace NearMindApp.Views
                 if (usuario != null)
                 {
                     var imagenPerfilUrl = !string.IsNullOrEmpty(usuario.imagen_perfil) ? bucket.GetPublicUrl(usuario.imagen_perfil) : "anonimo.svg";
+                    var ultimoMensaje = await _chatService.ObtenerUltimoMensajeAsync(_usuarioActual.id, usuarioId);
+
                     Chats.Add(new ChatItem
                     {
                         UsuarioId = usuarioId,
                         NombreUsuario = usuario.nombre,
-                        ImagenPerfil = imagenPerfilUrl
+                        ImagenPerfil = imagenPerfilUrl,
+                        UltimoMensaje = ultimoMensaje?.texto ?? "No hay mensajes",
+                        FechaUltimoMensaje = ultimoMensaje?.fechaHora ?? DateTime.MinValue
                     });
                 }
             }
@@ -81,12 +85,25 @@ namespace NearMindApp.Views
             {
                 var imagenPerfilUrl = !string.IsNullOrEmpty(usuario.imagen_perfil) ? bucket.GetPublicUrl(usuario.imagen_perfil) : "anonimo.svg";
 
-                Chats.Add(new ChatItem
+                var ultimoMensaje = await _chatService.ObtenerUltimoMensajeAsync(_usuarioActual.id, usuarioId);
+
+                var chatItem = Chats.FirstOrDefault(c => c.UsuarioId == usuarioId);
+                if (chatItem != null)
                 {
-                    UsuarioId = usuarioId,
-                    NombreUsuario = usuario.nombre,
-                    ImagenPerfil = imagenPerfilUrl
-                });
+                    chatItem.UltimoMensaje = ultimoMensaje?.texto ?? "No hay mensajes";
+                    chatItem.FechaUltimoMensaje = ultimoMensaje?.fechaHora ?? DateTime.MinValue;
+                }
+                else
+                {
+                    Chats.Add(new ChatItem
+                    {
+                        UsuarioId = usuarioId,
+                        NombreUsuario = usuario.nombre,
+                        ImagenPerfil = imagenPerfilUrl,
+                        UltimoMensaje = ultimoMensaje?.texto ?? "No hay mensajes",
+                        FechaUltimoMensaje = ultimoMensaje?.fechaHora ?? DateTime.MinValue
+                    });
+                }
             }
         }
     }

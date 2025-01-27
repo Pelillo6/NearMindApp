@@ -86,6 +86,12 @@ namespace NearMindApp.Utilidades
             return messages.Select(m => m.Object).OrderBy(m => m.fechaHora).ToList();
         }
 
+        public async Task<Message?> ObtenerUltimoMensajeAsync(Guid usuario1Id, Guid usuario2Id)
+        {
+            var mensajes = await ObtenerMensajesAsync(usuario1Id, usuario2Id);
+            return mensajes.OrderByDescending(m => m.fechaHora).FirstOrDefault();
+        }
+
         public async Task<List<Guid>> ObtenerConversacionesAsync(Guid usuarioId)
         {
             // Obtener todas las claves de las conversaciones
@@ -114,6 +120,46 @@ namespace NearMindApp.Utilidades
 
             return idsConversaciones;
         }
+
+        public async Task<List<(Guid UsuarioId, Message UltimoMensaje)>> ObtenerConversacionesConUltimoMensajeAsync(Guid usuarioId)
+        {
+            var conversaciones = await _firebaseClient
+                .Child("messages")
+                .OnceAsync<object>();
+
+            var resultados = new List<(Guid, Message)>();
+
+            foreach (var conversacion in conversaciones)
+            {
+                var claves = conversacion.Key.Split('_');
+                if (claves.Length == 2)
+                {
+                    var id1 = Guid.Parse(claves[0]);
+                    var id2 = Guid.Parse(claves[1]);
+
+
+                    var otroUsuarioId = id1 == usuarioId ? id2 : id1;
+
+
+                    var mensajes = await _firebaseClient
+                        .Child("messages")
+                        .Child(conversacion.Key)
+                        .OrderBy("fechaHora")
+                        .LimitToLast(1)
+                        .OnceAsync<Message>();
+
+                    var ultimoMensaje = mensajes.FirstOrDefault()?.Object;
+
+                    if (ultimoMensaje != null)
+                    {
+                        resultados.Add((otroUsuarioId, ultimoMensaje));
+                    }
+                }
+            }
+
+            return resultados;
+        }
+
         public void SubscribeToConversaciones(Guid usuarioId, Action<Guid> onNuevaConversacion)
         {
             _firebaseClient
