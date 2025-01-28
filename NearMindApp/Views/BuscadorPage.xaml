@@ -4,45 +4,74 @@
              x:Class="NearMindApp.Views.BuscadorPage"
              IconImageSource="search.svg">
 
-    <StackLayout BackgroundColor="#ECF2F6" Padding="10">
-        <Label Text="Lista de Psicólogos" 
-               FontSize="20" 
-               HorizontalOptions="Center" />
+    <ScrollView BackgroundColor="#ECF2F6" Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0"
+                   CornerRadius="50"
+                   Padding="0"
+                   Margin="10"
+                   WidthRequest="350"
+                   HeightRequest="40">
+                <SearchBar x:Name="SearchBarFiltro" 
+                           Placeholder="Buscar..."
+                           Margin="-2"
+                           TextColor="#ACABDD"
+                           PlaceholderColor="#ACABDD"
+                           TextChanged="OnFiltroChanged" 
+                           BackgroundColor="White"/>
+            </Frame>
 
-        <SearchBar x:Name="SearchBarFiltro" 
-                   Placeholder="Buscar por nombre o ubicación" 
-                   TextChanged="OnFiltroChanged" />
+            <CollectionView Grid.Row="1" 
+                            x:Name="PsicologosListView" 
+                            SelectionMode="Single" 
+                            SelectionChanged="OnUsuarioSelected">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2" />
+                </CollectionView.ItemsLayout>
 
-        <Picker x:Name="PickerValoracion" 
-        Title="Filtrar por valoración" 
-        SelectedIndexChanged="OnFiltroChanged">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Todos</x:String>
-                    <x:String>9.0 o más</x:String>
-                    <x:String>8.0 o más</x:String>
-                    <x:String>7.0 o más</x:String>
-                    <x:String>6.0 o más</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="10" BackgroundColor="White" Padding="0" BorderColor="Transparent" WidthRequest="150" Margin="10" HasShadow="False">
+                            <Grid Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-        <CollectionView x:Name="UsuariosCollectionView" 
-                        SelectionMode="Single" 
-                        SelectionChanged="OnUsuarioSelected">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Orientation="Horizontal" Padding="10">
-                        <Label Text="{Binding nombre}" 
-                               FontSize="16" 
-                               VerticalOptions="Center" />
-                        <Label Text="{Binding ubicacion}" 
-                               FontSize="14" 
-                               TextColor="Gray" 
-                               VerticalOptions="Center" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+                                <Image Grid.Row="0" 
+                                       Source="{Binding ImagenPerfil}"
+                                       Aspect="AspectFill"  
+                                       HeightRequest="120"
+                                       VerticalOptions="Start"/>
+                                <Label Grid.Row="1"
+                                       Text="{Binding NombreUsuario}" 
+                                       FontSize="16" 
+                                       TextColor="#53518C"
+                                       FontAttributes="Bold"
+                                       Margin="10,0,0,0"/>
+                                <Label Grid.Row="2"
+                                       Text="{Binding Especialidad}" 
+                                       FontSize="12" 
+                                       TextColor="#53518C"
+                                       Margin="10,0,0,0"/>
+                                <Label Grid.Row="3"
+                                       Text="{Binding PrecioHora, StringFormat='{0}€/h'}" 
+                                       FontSize="12" 
+                                       TextColor="#53518C"
+                                       HorizontalOptions="End"
+                                       Margin="0,0,10,0"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
 </ContentPage>

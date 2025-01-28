@@ -1,19 +1,26 @@
 using NearMindApp.Services;
 using NearMindApp.Models;
+using NearMindApp.Utilidades;
+using System.Collections.ObjectModel;
 
 namespace NearMindApp.Views;
 
 public partial class BuscadorPage : ContentPage
 {
     private SupabaseService _supabaseService;
-    private List<Usuario> _usuariosOriginales;
-    private List<Usuario> _usuariosFiltrados; 
+    private ChatService _chatService;
+    private List<BuscadorItem> _itemsOriginales;
+    private List<BuscadorItem> _itemsFiltrados;
+    private ObservableCollection<BuscadorItem> ListaPsicologos { get; set; }
 
     public BuscadorPage()
     {
         InitializeComponent();
         _supabaseService = new SupabaseService();
+        _chatService = new ChatService();
         BindingContext = this;
+        ListaPsicologos = new ObservableCollection<BuscadorItem>();
+        PsicologosListView.ItemsSource = ListaPsicologos;
     }
 
     protected override async void OnAppearing()
@@ -21,15 +28,32 @@ public partial class BuscadorPage : ContentPage
         base.OnAppearing();
         try
         {
+            var storage = _supabaseService.GetClient().Storage;
+            var bucket = storage.From("imagenes-perfil");
             List<Usuario> usuarios = await _supabaseService.ObtenerElementosDeTabla<Usuario>();
             var usuario = UsuarioService.Instance.GetUsuarioActual();
 
-            // Filtrar la lista según el rol
-            if (usuario.rol == "Paciente")
-            {
-                UsuariosCollectionView.ItemsSource = usuarios.Where(u => u.rol == "Psicologo").ToList();
+            // Obtener las conversaciones del usuario actual
+            var conversaciones = await _chatService.ObtenerConversacionesAsync(usuario.id);
+
+            var psicologos = usuarios.Where(u => u.rol == "Psicologo" && !conversaciones.Contains(u.id)).ToList();
+
+            ListaPsicologos.Clear();
+            foreach (var psicologo in psicologos) {
+                var imagenPerfilUrl = !string.IsNullOrEmpty(psicologo.imagen_perfil) ? bucket.GetPublicUrl(psicologo.imagen_perfil) : "anonimo.svg";
+                var precioFormated = psicologo.precio.ToString();
+
+                ListaPsicologos.Add(new BuscadorItem
+                {
+                    UsuarioId = psicologo.id,
+                    NombreUsuario = psicologo.nombre.ToString(),
+                    ImagenPerfil = imagenPerfilUrl,
+                    Ciudad = psicologo.ubicacion,
+                    Especialidad = psicologo.especialidad,
+                    PrecioHora = precioFormated
+                });
             }
-            
+
         }
         catch (Exception ex)
         {
@@ -39,31 +63,15 @@ public partial class BuscadorPage : ContentPage
 
     private void OnFiltroChanged(object sender, EventArgs e)
     {
-
-        // Obtenemos los valores actuales de los filtros
         string textoFiltro = SearchBarFiltro.Text?.ToLower() ?? string.Empty;
-        string filtroValoracion = PickerValoracion.SelectedItem?.ToString() ?? "Todos";
+        _itemsFiltrados = ListaPsicologos.Where(i => i != null && (
+             (!string.IsNullOrWhiteSpace(i.NombreUsuario) && i.NombreUsuario.ToLower().Contains(textoFiltro)) ||
+             (!string.IsNullOrWhiteSpace(i.Especialidad) && i.Especialidad.ToLower().Contains(textoFiltro)) ||
+             (!string.IsNullOrWhiteSpace(i.PrecioHora) && i.PrecioHora.ToLower().Contains(textoFiltro))
+             )).ToList();
 
-        // Filtramos la lista
-        _usuariosFiltrados = _usuariosOriginales
-     .Where(u =>
-         u != null && // Validar que el objeto no sea nulo
-         (
-             // Filtro por nombre o ubicación
-             (!string.IsNullOrWhiteSpace(u.nombre) && u.nombre.ToLower().Contains(textoFiltro)) ||
-             (!string.IsNullOrWhiteSpace(u.ubicacion) && u.ubicacion.ToLower().Contains(textoFiltro))
-         ) &&
-         // Filtro por valoración
-         (filtroValoracion == "Todos" ||
-          (filtroValoracion == "9.0 o más" && (u.valoracion_media ?? 0) >= 9.0) ||
-          (filtroValoracion == "8.0 o más" && (u.valoracion_media ?? 0) >= 8.0) ||
-          (filtroValoracion == "7.0 o más" && (u.valoracion_media ?? 0) >= 7.0) ||
-          (filtroValoracion == "6.0 o más" && (u.valoracion_media ?? 0) >= 6.0))
-     )
-     .ToList();
+        PsicologosListView.ItemsSource = _itemsFiltrados;
 
-        // Actualizamos la vista
-        UsuariosCollectionView.ItemsSource = _usuariosFiltrados;
     }
 
     private async void OnUsuarioSelected(object sender, SelectionChangedEventArgs e)
@@ -73,4 +81,5 @@ public partial class BuscadorPage : ContentPage
             await Navigation.PushAsync(new ChatPage(usuarioSeleccionado));
         }
     }
+    
 }

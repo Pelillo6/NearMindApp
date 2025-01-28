@@ -21,18 +21,14 @@ namespace NearMindApp.Views
             InitializeComponent();
             _usuarioActual = UsuarioService.Instance.GetUsuarioActual();
             _chatService = new ChatService();
-            Chats = new ObservableCollection<ChatItem>();
             _supabaseService = new SupabaseService();
+            Chats = new ObservableCollection<ChatItem>();
             ChatsListView.ItemsSource = Chats;
-            
             CargarChats();
-
-            _chatService.SubscribeToConversaciones(_usuarioActual.id, OnNuevaConversacion);
         }
 
         private async void CargarChats()
         {
-            // Obtener las claves de las conversaciones
             var conversaciones = await _chatService.ObtenerConversacionesAsync(_usuarioActual.id);
             var storage = _supabaseService.GetClient().Storage;
             var bucket = storage.From("imagenes-perfil");
@@ -40,7 +36,7 @@ namespace NearMindApp.Views
             Chats.Clear();
             foreach (var conversacion in conversaciones)
             {
-                var usuarioId = conversacion; // ID del usuario con el que se conversa
+                var usuarioId = conversacion;
                 var usuario = await UsuarioService.Instance.ObtenerUsuarioPorId(usuarioId);
                 
                 if (usuario != null)
@@ -72,39 +68,6 @@ namespace NearMindApp.Views
             }
         }
 
-        private async void OnNuevaConversacion(Guid usuarioId)
-        {
-            var storage = _supabaseService.GetClient().Storage;
-            var bucket = storage.From("imagenes-perfil");
-
-            if (Chats.Any(c => c.UsuarioId == usuarioId))
-                return;
-
-            var usuario = await UsuarioService.Instance.ObtenerUsuarioPorId(usuarioId);
-            if (usuario != null)
-            {
-                var imagenPerfilUrl = !string.IsNullOrEmpty(usuario.imagen_perfil) ? bucket.GetPublicUrl(usuario.imagen_perfil) : "anonimo.svg";
-
-                var ultimoMensaje = await _chatService.ObtenerUltimoMensajeAsync(_usuarioActual.id, usuarioId);
-
-                var chatItem = Chats.FirstOrDefault(c => c.UsuarioId == usuarioId);
-                if (chatItem != null)
-                {
-                    chatItem.UltimoMensaje = ultimoMensaje?.texto ?? "No hay mensajes";
-                    chatItem.FechaUltimoMensaje = ultimoMensaje?.fechaHora ?? DateTime.MinValue;
-                }
-                else
-                {
-                    Chats.Add(new ChatItem
-                    {
-                        UsuarioId = usuarioId,
-                        NombreUsuario = usuario.nombre,
-                        ImagenPerfil = imagenPerfilUrl,
-                        UltimoMensaje = ultimoMensaje?.texto ?? "No hay mensajes",
-                        FechaUltimoMensaje = ultimoMensaje?.fechaHora ?? DateTime.MinValue
-                    });
-                }
-            }
-        }
+        
     }
 }
