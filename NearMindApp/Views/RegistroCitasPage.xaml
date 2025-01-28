@@ -1,8 +1,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NearMindApp.Views.RegistroCitasPage"
-             Title="Registro de Citas">
-    <StackLayout>
+             x:Class="NearMindApp.Views.RegistroCitasPage">
+    <StackLayout BackgroundColor="#ECF2F6">
         <CollectionView x:Name="CitasCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

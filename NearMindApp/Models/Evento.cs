@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Supabase.Postgrest.Models;
 using Supabase.Postgrest.Attributes;
@@ -30,5 +25,11 @@ namespace NearMindApp.Models
         [JsonPropertyName("usuario_id")]
         public Guid usuario_id { get; set; }
 
+        [Required]
+        [JsonPropertyName("hora")]
+        public TimeSpan hora { get; set; }
+        public Evento()
+        {
+        }
     }
 }

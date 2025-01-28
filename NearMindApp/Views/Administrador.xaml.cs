@@ -9,8 +9,6 @@ namespace NearMindApp.Views
         {
             InitializeComponent();
         }
-
-        // Método que se llama cuando el botón es presionado
         private async void OnNavigateToListaSolicitudesClicked(object sender, EventArgs e)
         {
             // Navegamos a la página Lista de Solicitudes

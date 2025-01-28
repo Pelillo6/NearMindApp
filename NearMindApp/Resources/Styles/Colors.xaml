@@ -30,8 +30,8 @@
 
     <Color x:Key="TabIconUnselected">#53518C</Color>
     <Color x:Key="TabIconSelected">#ED8A6C</Color>
-    
-    
+    <Color x:Key="BackgroundColor">#ECF2F6</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>

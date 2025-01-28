@@ -4,7 +4,7 @@
              x:Class="NearMindApp.Views.PerfilPage"
              NavigationPage.HasNavigationBar="False"
              IconImageSource="user.svg">
-    <ScrollView>
+    <ScrollView BackgroundColor="#ECF2F6">
         <StackLayout Padding="20" Spacing="15">
             <Grid VerticalOptions="Center">
                 <Label Text="NearMind"
@@ -138,6 +138,7 @@
                    TextColor="#53518C"/>
             <Frame BorderColor="#6F6CCB" 
                    CornerRadius="10" 
+                   BackgroundColor="Transparent"
                    Padding="0,0,0,-10"
                    HeightRequest="150">
                 <Editor x:Name="Descripcion"

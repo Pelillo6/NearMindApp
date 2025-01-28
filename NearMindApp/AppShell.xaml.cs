@@ -11,7 +11,7 @@ namespace NearMindApp
         public AppShell()
         {
             InitializeComponent();
-
+            
             var usuario = UsuarioService.Instance.GetUsuarioActual();
             IsAdmin = usuario.rol == "Admin";
             IsPaciente = usuario.rol == "Paciente";

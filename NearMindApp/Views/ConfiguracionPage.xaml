@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NearMindApp.Views.ConfiguracionPage"
              Title="Configuracion">
-    <StackLayout>
+    <StackLayout BackgroundColor="#ECF2F6">
         <Label Text="Validar psicologos"
                HorizontalOptions="CenterAndExpand"
                VerticalOptions="Start" />

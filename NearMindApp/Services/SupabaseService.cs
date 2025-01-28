@@ -55,6 +55,6 @@ namespace NearMindApp.Services
                 Console.WriteLine($"Error al actualizar elemento: {ex.Message}");
             }
         }
-
+        
     }
 }

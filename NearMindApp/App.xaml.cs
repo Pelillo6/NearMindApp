@@ -1,4 +1,6 @@
 ﻿using NearMindApp.Views;
+using Syncfusion.Licensing;
+using System.Globalization;
 
 namespace NearMindApp
 {
@@ -7,7 +9,9 @@ namespace NearMindApp
         public App()
         {
             InitializeComponent();
-
+            Preferences.Get("language", "es-ES");
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-ES");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("es-ES");
             MainPage = new NavigationPage(new HomePage());
         }
 

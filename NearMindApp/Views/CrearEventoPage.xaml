@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="NearMindApp.Views.CrearEventoPage"
+               NavigationPage.HasNavigationBar="False">
+
+    <VerticalStackLayout BackgroundColor="#ECF2F6" >
+        <StackLayout Padding="20" Spacing="15">
+            <Grid VerticalOptions="Center">
+                <Label Text="NearMind"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#53518C"
+                       Margin="10"/>
+
+            </Grid>
+
+            <Label Text="Nombre evento"
+                   TextColor="#9792C5"
+                   Margin="5,0,0,-25"
+                   FontSize="14"/>
+            <Entry x:Name="NombreEntry" 
+                   Margin="0,0,0,0"
+                   FontSize="16"
+                   TextColor="#53518C"
+                   FontAttributes="Bold" />
+
+            <Label Text="Descripción"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#53518C"/>
+
+            <Frame BorderColor="#6F6CCB" 
+                   CornerRadius="10" 
+                   BackgroundColor="Transparent"
+                   Padding="0,0,0,-10"
+                   HeightRequest="150">
+                <Editor x:Name="DescripcionEntry"
+                        VerticalOptions="FillAndExpand"
+                        TextColor="#53518C"
+                        PlaceholderColor="#D3CFEE"/>
+            </Frame>
+
+
+            <Label Text="Hora"
+                   TextColor="#53518C"
+                   Margin="5,0,0,-25"  
+                   FontSize="14"/>
+            
+            <TimePicker x:Name="HoraPicker" />
+
+            <Button Text="Crear" BackgroundColor="#53518C" TextColor="White" 
+                Clicked="OnCrearClicked" />
+
+            <Button Text="Cancelar" BackgroundColor="Gray" TextColor="White" 
+                Clicked="OnCancelarClicked" />
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
+             

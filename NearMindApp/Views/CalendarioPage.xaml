@@ -6,10 +6,36 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar"
              IconImageSource="calendar.svg">
 
+    <ScrollView BackgroundColor="#ECF2F6">
+        <StackLayout  Padding="20" Spacing="15">
+            <Grid VerticalOptions="Center">
+                <Label Text="NearMind"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#53518C"
+                       Margin="10"/>
+            </Grid>
 
-    <ContentPage.Content>
-        <syncfusion:SfCalendar x:Name="Calendario"
-                               HeightRequest="400"
-                               SelectionChanged="OnSelectionChanged" />
-    </ContentPage.Content>
+            <syncfusion:SfCalendar x:Name="Calendario"
+                                   HeightRequest="300"
+                                   SelectionChanged="OnSelectionChanged"
+                                   BackgroundColor="Transparent">
+                <syncfusion:SfCalendar.MonthView>
+                    <syncfusion:CalendarMonthView FirstDayOfWeek="Monday"/>
+                </syncfusion:SfCalendar.MonthView>
+            </syncfusion:SfCalendar>
+
+            <StackLayout x:Name="EventosStack" Padding="10" IsVisible="False">
+            </StackLayout>
+
+            <Button Text="Crear Evento"
+                    HorizontalOptions="Center"
+                    BackgroundColor="#726FA6"
+                    TextColor="White"
+                    CornerRadius="15"
+                    Clicked="OnCrearEventoClicked"/>
+
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

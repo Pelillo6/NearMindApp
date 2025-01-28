@@ -4,8 +4,7 @@
              x:Class="NearMindApp.Views.ChatPage"
              Title="Chat"
              IconImageSource="chat.svg">
-    <StackLayout>
-        <!-- Lista de mensajes -->
+    <StackLayout BackgroundColor="#ECF2F6">
         <CollectionView x:Name="MessagesCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
