@@ -27,8 +27,7 @@
 
             <CollectionView Grid.Row="1" 
                             x:Name="PsicologosListView" 
-                            SelectionMode="Single" 
-                            SelectionChanged="OnUsuarioSelected">
+                            SelectionMode="Single" >
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
                                      Span="2" />
@@ -37,6 +36,9 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame CornerRadius="10" BackgroundColor="White" Padding="0" BorderColor="Transparent" WidthRequest="150" Margin="10" HasShadow="False">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFrameTapped" CommandParameter="{Binding}" />
+                            </Frame.GestureRecognizers>
                             <Grid Padding="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>

@@ -74,12 +74,12 @@ public partial class BuscadorPage : ContentPage
 
     }
 
-    private async void OnUsuarioSelected(object sender, SelectionChangedEventArgs e)
+    private async void OnFrameTapped(object sender, EventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is Usuario usuarioSeleccionado)
+        if (sender is Frame frame && frame.BindingContext is BuscadorItem usuarioSeleccionado)
         {
-            await Navigation.PushAsync(new ChatPage(usuarioSeleccionado));
+            await Navigation.PushAsync(new PerfilPsicologoPage(usuarioSeleccionado.UsuarioId));
         }
     }
-    
+
 }

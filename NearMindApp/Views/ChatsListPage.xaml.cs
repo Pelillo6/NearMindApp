@@ -63,7 +63,7 @@ namespace NearMindApp.Views
                 var usuarioDestino = await UsuarioService.Instance.ObtenerUsuarioPorId(chatItem.UsuarioId);
                 if (usuarioDestino != null)
                 {
-                    await Navigation.PushAsync(new ChatPage(usuarioDestino));
+                    await Navigation.PushAsync(new ChatPage(usuarioDestino.id));
                 }
             }
         }

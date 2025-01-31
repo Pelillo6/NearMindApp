@@ -8,19 +8,16 @@ namespace NearMindApp.Views;
 public partial class ChatPage : ContentPage
 {
     private readonly ChatService _chatService;
-    private Usuario _usuarioDestino;
+    private Guid _idUsuario;
     private Usuario _usuarioEmisor;
 
     public ObservableCollection<Message> Messages { get; set; }
 
-    public ChatPage(Usuario usuarioDestino)
+    public ChatPage(Guid idUsuario)
     {
         InitializeComponent();
-        
-
-        _usuarioDestino = usuarioDestino;
+        _idUsuario = idUsuario;
         _usuarioEmisor = UsuarioService.Instance.GetUsuarioActual();
-        Title = $"Chat con {_usuarioDestino.nombre}";
 
         _chatService = new ChatService();
         Messages = new ObservableCollection<Message>();
@@ -35,7 +32,7 @@ public partial class ChatPage : ContentPage
     private async void CargarMensajes()
     {
         // Carga mensajes históricos
-        var mensajes = await _chatService.ObtenerMensajesAsync(_usuarioEmisor.id, _usuarioDestino.id);
+        var mensajes = await _chatService.ObtenerMensajesAsync(_usuarioEmisor.id, _idUsuario);
         foreach (var mensaje in mensajes)
         {
             // Busca el nombre del emisor
@@ -45,7 +42,7 @@ public partial class ChatPage : ContentPage
         }
 
 
-        await _chatService.SubscribeToMessagesAsync(_usuarioEmisor.id, _usuarioDestino.id, Messages);
+        await _chatService.SubscribeToMessagesAsync(_usuarioEmisor.id, _idUsuario, Messages);
     }
 
     private async void OnSendMessageClicked(object sender, EventArgs e)
@@ -53,7 +50,7 @@ public partial class ChatPage : ContentPage
         var texto = MessageEntry.Text;
         if (!string.IsNullOrWhiteSpace(texto))
         {
-            await _chatService.SendMessageAsync(_usuarioEmisor.id, _usuarioDestino.id, texto);
+            await _chatService.SendMessageAsync(_usuarioEmisor.id, _idUsuario, texto);
             MessageEntry.Text = string.Empty;
         }
     }
@@ -73,7 +70,7 @@ public partial class ChatPage : ContentPage
             var nuevaCita = new Cita
             {
                 usuario1_id = _usuarioEmisor.id, // ID del usuario actual (emisor)
-                usuario2_id = _usuarioDestino.id, // ID del destinatario
+                usuario2_id = _idUsuario, // ID del destinatario
                 fecha = fechaSeleccionada.Value, // Fecha seleccionada
                 nota = $"Solicitud de cita de {_usuarioEmisor.nombre}"
             };

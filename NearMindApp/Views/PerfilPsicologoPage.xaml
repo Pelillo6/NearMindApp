@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NearMindApp.Views.PerfilPsicologoPage"
+             IconImageSource="chat.svg">
+    <ScrollView BackgroundColor="#ECF2F6">
+        <StackLayout>
+            <Image x:Name="ImagenPerfil"
+                   Source="anonimo.svg"/>
+        
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
