@@ -2,12 +2,84 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NearMindApp.Views.PerfilPsicologoPage"
-             IconImageSource="chat.svg">
+             IconImageSource="chat.svg"
+             NavigationPage.HasNavigationBar="False">
     <ScrollView BackgroundColor="#ECF2F6">
         <StackLayout>
-            <Image x:Name="ImagenPerfil"
-                   Source="anonimo.svg"/>
-        
+            <Grid ZIndex="1">
+                <Image Source="salir.svg"
+                       BackgroundColor="Transparent"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                       Margin="20"
+                       ZIndex="1">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSalirTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image x:Name="ImagenPerfil"
+                       Source="anonimo.svg"
+                       Aspect="AspectFill"
+                       ZIndex="0"
+                       HeightRequest="200"/>
+            </Grid>
+            <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                <Image Source="mancha.svg"
+                  Opacity="0.8"
+                  Margin="0,-30,0,0"
+                  ZIndex="0"
+                  Aspect="AspectFill"
+                  WidthRequest="450"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Frame Grid.Row="0" BackgroundColor="Transparent" BorderColor="Transparent">
+                        <StackLayout>
+                            <Label x:Name="Nombre"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               TextColor="#53518C"/>
+                            <Label x:Name="Especialidad"
+                               FontSize="14"
+                               TextColor="#53518C"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Row="1" BackgroundColor="Transparent" BorderColor="Transparent" Margin="0,40,0,0">
+                        <StackLayout>
+                            <Label x:Name="Descripcion"
+                                   TextColor="#53518C"
+                                   FontSize="12"
+                                   WidthRequest="250"
+                                   LineBreakMode="WordWrap"
+                                   HorizontalOptions="End"/>
+                            <Button Text="Abrir chat"
+                                    BackgroundColor="#726FA6"
+                                    TextColor="White"
+                                    FontSize="12"
+                                    HeightRequest="30"
+                                    WidthRequest="100"
+                                    Padding="0"
+                                    Margin="0,15,50,0"
+                                    CornerRadius="10"
+                                    Clicked="OnAbrirChatClicked"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Grid.Row="2" BackgroundColor="Transparent" BorderColor="Transparent" Margin="0,120,0,0">
+                        <StackLayout>
+                            <Label x:Name="Direccion"
+                                   FontSize="12"
+                                   TextColor="#53518C"
+                                   WidthRequest="150"
+                                   LineBreakMode="WordWrap"
+                                   HorizontalOptions="Start"/>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </Grid>
+
         </StackLayout>
     </ScrollView>
 </ContentPage>

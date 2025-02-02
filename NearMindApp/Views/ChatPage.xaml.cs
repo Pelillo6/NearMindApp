@@ -120,5 +120,9 @@ public partial class ChatPage : ContentPage
         await Navigation.PopModalAsync();
         return resultado;
     }
-
+    private async void OnSalirTapped(object sender, EventArgs e)
+    {
+        ((App)Application.Current).MostrarAppShell();
+        await Shell.Current.GoToAsync("//BuscadorPage");
+    }
 }

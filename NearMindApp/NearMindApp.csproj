@@ -77,6 +77,8 @@
 	  <None Remove="Resources\Images\edit.svg" />
 	  <None Remove="Resources\Images\fondo_home.png" />
 	  <None Remove="Resources\Images\logout.svg" />
+	  <None Remove="Resources\Images\mancha.svg" />
+	  <None Remove="Resources\Images\salir.svg" />
 	  <None Remove="Resources\Images\search.svg" />
 	  <None Remove="Resources\Images\settings.svg" />
 	  <None Remove="Resources\Images\user.svg" />

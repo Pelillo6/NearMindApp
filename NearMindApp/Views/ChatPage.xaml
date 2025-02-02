@@ -2,9 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NearMindApp.Views.ChatPage"
-             Title="Chat"
+             NavigationPage.HasNavigationBar="False"
              IconImageSource="chat.svg">
     <StackLayout BackgroundColor="#ECF2F6">
+        <Image Source="salir.svg"
+               BackgroundColor="Transparent"
+               HorizontalOptions="Start"
+               VerticalOptions="Start"
+               Margin="20">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnSalirTapped" />
+            </Image.GestureRecognizers>
+        </Image>
         <CollectionView x:Name="MessagesCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

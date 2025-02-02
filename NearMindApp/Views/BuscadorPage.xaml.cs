@@ -78,7 +78,7 @@ public partial class BuscadorPage : ContentPage
     {
         if (sender is Frame frame && frame.BindingContext is BuscadorItem usuarioSeleccionado)
         {
-            await Navigation.PushAsync(new PerfilPsicologoPage(usuarioSeleccionado.UsuarioId));
+            Application.Current.MainPage = new PerfilPsicologoPage(usuarioSeleccionado.UsuarioId);
         }
     }
 

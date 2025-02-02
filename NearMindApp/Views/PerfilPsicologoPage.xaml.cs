@@ -33,8 +33,22 @@ public partial class PerfilPsicologoPage : ContentPage
             var bucket = storage.From("imagenes-perfil");
 
             ImagenPerfil.Source = bucket.GetPublicUrl(_psicologo.imagen_perfil);
+            Nombre.Text = _psicologo.nombre;
+            Especialidad.Text = _psicologo.especialidad;
+            Descripcion.Text = _psicologo.descripcion;
+            Direccion.Text = _psicologo.ubicacion;
         }
 
     }
-
+    private async void OnAbrirChatClicked(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new ChatPage(_psicologo.id);
     }
+    private async void OnSalirTapped(object sender, EventArgs e)
+    {
+        ((App)Application.Current).MostrarAppShell();
+        await Shell.Current.GoToAsync("//BuscadorPage");
+    }
+    
+
+}
