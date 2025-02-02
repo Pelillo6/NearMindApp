@@ -33,11 +33,11 @@ public partial class PerfilPsicologoPage : ContentPage
             var bucket = storage.From("imagenes-perfil");
 
             ImagenPerfil.Source = bucket.GetPublicUrl(_psicologo.imagen_perfil);
-            Nombre.Text = _psicologo.nombre;
-            Especialidad.Text = _psicologo.especialidad;
-            Descripcion.Text = _psicologo.descripcion;
-            Direccion.Text = _psicologo.ubicacion;
         }
+        Nombre.Text = _psicologo.nombre;
+        Especialidad.Text = _psicologo.especialidad;
+        Descripcion.Text = _psicologo.descripcion;
+        Direccion.Text = _psicologo.direccion;
 
     }
     private async void OnAbrirChatClicked(object sender, EventArgs e)

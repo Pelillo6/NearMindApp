@@ -49,7 +49,7 @@ namespace NearMindApp.Views
                         UsuarioId = usuarioId,
                         NombreUsuario = usuario.nombre,
                         ImagenPerfil = imagenPerfilUrl,
-                        UltimoMensaje = ultimoMensaje?.texto ?? "No hay mensajes",
+                        UltimoMensaje = ultimoMensaje?.texto ?? "",
                         FechaUltimoMensaje = ultimoMensaje?.fechaHora ?? DateTime.MinValue
                     });
                 }
@@ -60,11 +60,7 @@ namespace NearMindApp.Views
         {
             if (e.CurrentSelection.FirstOrDefault() is ChatItem chatItem)
             {
-                var usuarioDestino = await UsuarioService.Instance.ObtenerUsuarioPorId(chatItem.UsuarioId);
-                if (usuarioDestino != null)
-                {
-                    await Navigation.PushAsync(new ChatPage(usuarioDestino.id));
-                }
+                Application.Current.MainPage = new ChatPage(chatItem.UsuarioId);
             }
         }
 

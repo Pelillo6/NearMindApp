@@ -16,7 +16,7 @@
                Margin="20"
                HasShadow="True"
                VerticalOptions="Center">
-
+            <ScrollView>
             <VerticalStackLayout HorizontalOptions="FillAndExpand" Spacing="15">
 
                 <Label Text="NearMind"
@@ -92,7 +92,7 @@
                     <Entry x:Name="Telefono"/>
                 </Frame>
 
-                <Label Text="Ubicación"
+                <Label Text="Ciudad"
                        FontSize="14"
                        FontAttributes="Bold"
                        HorizontalOptions="Start"
@@ -103,6 +103,19 @@
                        CornerRadius="10" 
                        Padding="5,0,5,-10"  >
                     <Entry x:Name="Ubicacion"/>
+                </Frame>
+
+                <Label Text="Direccion"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Start"
+                       TextColor="#53518C"
+                       Padding="5,0,0,0"/>
+
+                <Frame BorderColor="#6F6CCB" 
+                       CornerRadius="10" 
+                       Padding="5,0,5,-10"  >
+                    <Entry x:Name="Direccion"/>
                 </Frame>
 
                 <Label x:Name="MensajeLabel" 
@@ -126,6 +139,7 @@
                 </Label>
 
             </VerticalStackLayout>
+            </ScrollView>
         </Frame>
     </Grid>
 </ContentPage>

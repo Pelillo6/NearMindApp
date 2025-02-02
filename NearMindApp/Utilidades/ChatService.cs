@@ -35,6 +35,7 @@ namespace NearMindApp.Utilidades
 
         public async Task SendMessageAsync(Guid emisorId, Guid receptorId, string text)
         {
+            Usuario _usuarioActual = UsuarioService.Instance.GetUsuarioActual();
             var usuario = await UsuarioService.Instance.ObtenerUsuarioPorId(emisorId);
             var message = new Message
             {
@@ -43,7 +44,8 @@ namespace NearMindApp.Utilidades
                 receptorId = receptorId,
                 texto = text,
                 fechaHora = DateTime.UtcNow,
-                NombreEmisor = usuario.nombre
+                NombreEmisor = usuario.nombre,
+                EsEnviado = emisorId == _usuarioActual.id
             };
 
             string conversationKey = GenerateConversationKey(emisorId, receptorId);

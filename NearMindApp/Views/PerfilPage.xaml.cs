@@ -182,6 +182,7 @@ public partial class PerfilPage : ContentPage
             Precio.IsEnabled = false;
             FecNacimiento.IsEnabled = false;
             Descripcion.IsEnabled = false;
+            BotonFoto.IsEnabled = false;
             BtnGuardar.IsVisible = false;
             BtnEditar.IsVisible = true;
 
@@ -209,6 +210,7 @@ public partial class PerfilPage : ContentPage
         Precio.IsEnabled = true;
         FecNacimiento.IsEnabled = true;
         Descripcion.IsEnabled = true;
+        BotonFoto.IsEnabled = true;
         BtnGuardar.IsVisible = true;
         BtnEditar.IsVisible = false;
     }

@@ -2,40 +2,90 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NearMindApp.Views.ChatPage"
-             NavigationPage.HasNavigationBar="False"
-             IconImageSource="chat.svg">
-    <StackLayout BackgroundColor="#ECF2F6">
-        <Image Source="salir.svg"
-               BackgroundColor="Transparent"
-               HorizontalOptions="Start"
-               VerticalOptions="Start"
-               Margin="20">
-            <Image.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnSalirTapped" />
-            </Image.GestureRecognizers>
-        </Image>
-        <CollectionView x:Name="MessagesCollectionView">
+             BackgroundColor="#ECF2F6"
+             NavigationPage.HasNavigationBar="False">
+   
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <!-- ENCABEZADO -->
+        <Grid Row="0" BackgroundColor="White" Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="salir.svg" WidthRequest="24" HeightRequest="24" Grid.Column="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSalirTapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Frame Grid.Column="1" 
+                   Padding="0"
+                   BorderColor="Transparent"
+                   CornerRadius="20"
+                   Margin="10,0,10,0" 
+                   WidthRequest="40" 
+                   HeightRequest="40" 
+                   HorizontalOptions="Start">
+            <Image x:Name="ImagenPerfil"  
+                   Source="anonimo.svg" />
+            </Frame>
+            <Label x:Name="Nombre" 
+                   TextColor="#53518C"
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Start" 
+                   Grid.Column="2" />
+        </Grid>
+
+        <!-- LISTA DE MENSAJES -->
+        <CollectionView Grid.Row="1" x:Name="MessagesCollectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding NombreEmisor}" FontAttributes="Bold" />
-                        <Label Text="{Binding texto}" />
-                        <Label Text="{Binding fechaHora, StringFormat='{0:G}'}" FontSize="12" TextColor="Gray" />
-                    </StackLayout>
+                    <Frame Padding="10" BorderColor="Transparent"
+                           BackgroundColor="{Binding EsEnviado, Converter={StaticResource MessageColorConverter}}"
+                           CornerRadius="10">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding EsEnviado}" Value="True">
+                                <Setter Property="BackgroundColor" Value="#D3CFEE"/>
+                                <Setter Property="HorizontalOptions" Value="End"/>
+                                <Setter Property="Margin" Value="100,10,10,0"/> 
+                            </DataTrigger>
+
+                            <DataTrigger TargetType="Frame" Binding="{Binding EsEnviado}" Value="False">
+                                <Setter Property="BackgroundColor" Value="White"/>
+                                <Setter Property="HorizontalOptions" Value="Start"/>
+                                <Setter Property="Margin" Value="10,10,100,0"/>
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <StackLayout>
+                            <Label Text="{Binding texto}" TextColor="#53518C"/>
+                            <Label Text="{Binding fechaHora, StringFormat='{0:t}'}" FontSize="10" TextColor="Gray" HorizontalOptions="End"/>
+                        </StackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Campo para seleccionar la fecha de la cita -->
-        <DatePicker x:Name="DatePicker" />
+        <!-- BARRA DE MENSAJES -->
 
-        <!-- Botón para solicitar una cita -->
-        <Button Text="Solicitar Cita" Clicked="OnSolicitarCitaClicked" BackgroundColor="#4CAF50" TextColor="White" />
-
-        <!-- Campo de entrada para enviar mensajes -->
-        <StackLayout Orientation="Horizontal">
-            <Entry x:Name="MessageEntry" Placeholder="Escribe un mensaje" HorizontalOptions="FillAndExpand" />
-            <Button Text="Enviar" Clicked="OnSendMessageClicked" />
-        </StackLayout>
-    </StackLayout>
+            <Grid Row="2" BackgroundColor="Transparent" Padding="10" ColumnSpacing="10" ColumnDefinitions="Auto, *, Auto">
+                <Image Source="calendario_add.svg" WidthRequest="24" HeightRequest="24" Grid.Column="0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAbrirSelectorFecha"/>
+                    </Image.GestureRecognizers>
+            </Image>
+                <Frame Grid.Column="1" Padding="0" CornerRadius="20" BorderColor="Transparent" HorizontalOptions="FillAndExpand">
+                <Entry x:Name="MessageEntry" PlaceholderColor="#53518C" TextColor="#53518C" Placeholder="Escribir un mensaje" FontSize="12" HeightRequest="40" Margin="0,0,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="White"/>
+                </Frame>
+                <Image Source="flecha.svg" WidthRequest="24" HeightRequest="24" Grid.Column="2">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSendMessageClicked"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        
+    </Grid>
 </ContentPage>

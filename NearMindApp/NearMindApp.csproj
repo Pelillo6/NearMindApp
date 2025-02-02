@@ -72,9 +72,11 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\anonimo.svg" />
 	  <None Remove="Resources\Images\calendar.svg" />
+	  <None Remove="Resources\Images\calendario_add.svg" />
 	  <None Remove="Resources\Images\chat.svg" />
 	  <None Remove="Resources\Images\dotnet_bot.png" />
 	  <None Remove="Resources\Images\edit.svg" />
+	  <None Remove="Resources\Images\Flecha.svg" />
 	  <None Remove="Resources\Images\fondo_home.png" />
 	  <None Remove="Resources\Images\logout.svg" />
 	  <None Remove="Resources\Images\mancha.svg" />
@@ -100,6 +102,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\CrearCitaPage.xaml.cs">
+	    <DependentUpon>CrearCitaPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\PerfilPsicologoPage.xaml.cs">
 	    <DependentUpon>PerfilPsicologoPage.xaml</DependentUpon>
 	  </Compile>
@@ -127,6 +132,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\CrearCitaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PerfilPsicologoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

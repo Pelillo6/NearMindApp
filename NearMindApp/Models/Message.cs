@@ -18,5 +18,7 @@ namespace NearMindApp.Models
         public String texto { get; set; }
         public DateTime fechaHora { get; set; }
         public String NombreEmisor { get; set; }
+        public bool EsEnviado { get; set; }
+
     }
 }
