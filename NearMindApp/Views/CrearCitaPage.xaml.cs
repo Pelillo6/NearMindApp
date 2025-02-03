@@ -24,16 +24,16 @@ public partial class CrearCitaPage : ContentPage
         var response = await _supabaseService.GetClient().From<Usuario>().Where(u => u.id == _idUsuario).Get();
         _usuario = response.Models.FirstOrDefault();
 
-        TituloLabel.Text = "Cita con " + _usuario.nombre;
+        TituloLabel.Text = "Solicitud de cita con " + _usuarioActual.nombre;
         DescripcionEntry.Placeholder = "Opcional: Introduce una descripcion de la cita";
 
     }
 
-        private async void OnCrearClicked(object sender, EventArgs e)
+    private async void OnCrearClicked(object sender, EventArgs e)
     {
         var response = await _supabaseService.GetClient().From<Usuario>().Where(u => u.id == _idUsuario).Get();
         _usuario = response.Models.FirstOrDefault();
-        
+
         string descripcion = DescripcionEntry.Text;
         TimeSpan hora = HoraPicker.Time;
         DateTime fecha = FecCita.Date;
@@ -44,35 +44,26 @@ public partial class CrearCitaPage : ContentPage
             return;
         }
 
-        var nuevoEvento = new Evento
+        var cita = new Cita
         {
-            nombre = "Solicitud de cita con " + _usuario.nombre,
-            observaciones = descripcion,
+            nombre = "Solicitud de cita con " + _usuarioActual.nombre,
             fecha = fecha,
             hora = hora,
-            usuario_id = _usuarioActual.id
-            
-        };
-        
-        var nuevoEvento2 = new Evento
-        {
-            nombre = "Cita con " + _usuarioActual.nombre,
-            observaciones = descripcion,
-            fecha = fecha,
-            hora = hora,
-            usuario_id = _usuario.id
-
+            usuario1_id = _usuarioActual.id,
+            usuario2_id = _usuario.id,
+            observaciones = descripcion
         };
 
-        var resultadoEvento = await _supabaseService.GetClient().From<Evento>().Insert(nuevoEvento);
-        var resultadoEvento2 = await _supabaseService.GetClient().From<Evento>().Insert(nuevoEvento2);
+        var resultadoEvento = await _supabaseService.GetClient().From<Cita>().Insert(cita);
 
         ((App)Application.Current).MostrarAppShell();
+        await Shell.Current.GoToAsync("//ChatsListPage");
     }
 
-    private void OnCancelarClicked(object sender, EventArgs e)
+    private async void OnCancelarClicked(object sender, EventArgs e)
     {
         ((App)Application.Current).MostrarAppShell();
+        await Shell.Current.GoToAsync("//ChatsListPage");
     }
 
 

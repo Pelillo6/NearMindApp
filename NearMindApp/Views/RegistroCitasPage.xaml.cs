@@ -19,19 +19,11 @@ namespace NearMindApp.Views
         private async void CargarCitas()
         {
             var usuarioActual = UsuarioService.Instance.GetUsuarioActual();
-            var citas = await _supabaseService.ObtenerElementosDeTabla<Cita>();
+            var response = await _supabaseService.GetClient().From<Cita>().Where(c => c.usuario2_id == usuarioActual.id).Get();
 
-            var citasUI = citas.Select(cita => new CitaUI
-            {
-                id = cita.id,
-                fecha = cita.fecha,
-                usuario1_id = cita.usuario1_id,
-                usuario2_id = cita.usuario2_id,
-                nota = cita.nota,
-                EsDestinatario = cita.usuario2_id == usuarioActual.id
-            }).ToList();
+            var citas = response.Models;
 
-            CitasCollectionView.ItemsSource = citasUI;
+            CitasCollectionView.ItemsSource = citas;
 
         }
 
@@ -40,19 +32,34 @@ namespace NearMindApp.Views
             var boton = sender as Button;
             var citaSeleccionada = boton?.BindingContext as Cita;
 
-            if (citaSeleccionada == null || _usuarioActual.id != citaSeleccionada.usuario2_id)
+            var usuario1 = await _supabaseService.GetClient().From<Usuario>().Where(u => u.id == citaSeleccionada.usuario1_id).Get();
+            var usuario2 = await _supabaseService.GetClient().From<Usuario>().Where(u => u.id == citaSeleccionada.usuario2_id).Get();
+
+            var nuevoEvento = new Evento
             {
-                await DisplayAlert("Error", "No puedes aceptar esta cita.", "OK");
-                return;
-            }
+                nombre = "Cita con " + usuario1.Model.nombre,
+                fecha = citaSeleccionada.fecha,
+                hora = citaSeleccionada.hora,
+                usuario_id = usuario2.Model.id
 
-            citaSeleccionada.nota = "Cita aceptada";
+            };
+
+            var nuevoEvento2 = new Evento
+            {
+                nombre = "Cita con " + usuario2.Model.nombre,
+                fecha = citaSeleccionada.fecha,
+                hora = citaSeleccionada.hora,
+                usuario_id = usuario1.Model.id
+
+            };
             
+            await _supabaseService.GetClient().From<Cita>().Delete(citaSeleccionada);
 
-            await _supabaseService.ActualizarElementoEnTabla(citaSeleccionada.id, citaSeleccionada);
+            var resultadoEvento = await _supabaseService.GetClient().From<Evento>().Insert(nuevoEvento);
+            var resultadoEvento2 = await _supabaseService.GetClient().From<Evento>().Insert(nuevoEvento2);
 
             await DisplayAlert("Éxito", "Has aceptado la cita.", "OK");
-            CargarCitas(); // Recargar citas
+            CargarCitas();
         }
 
         private async void OnDenegarCitaClicked(object sender, EventArgs e)
@@ -60,19 +67,10 @@ namespace NearMindApp.Views
             var boton = sender as Button;
             var citaSeleccionada = boton?.BindingContext as Cita;
 
-            if (citaSeleccionada == null || _usuarioActual.id != citaSeleccionada.usuario2_id)
-            {
-                await DisplayAlert("Error", "No puedes cancelar esta cita.", "OK");
-                return;
-            }
-
-            citaSeleccionada.nota = "Cita cancelada";
-
-
-            await _supabaseService.ActualizarElementoEnTabla(citaSeleccionada.id, citaSeleccionada);
+            await _supabaseService.GetClient().From<Cita>().Delete(citaSeleccionada);
 
             await DisplayAlert("Éxito", "Has cancelado la cita.", "OK");
-            CargarCitas(); // Recargar citas
+            CargarCitas();
         }
     }
 

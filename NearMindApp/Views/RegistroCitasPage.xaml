@@ -1,24 +1,104 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:NearMindApp.Converters"
              x:Class="NearMindApp.Views.RegistroCitasPage">
-    <StackLayout BackgroundColor="#ECF2F6">
-        <CollectionView x:Name="CitasCollectionView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding fecha, StringFormat='Fecha: {0:dd/MM/yyyy}'}" />
-                        <Label Text="{Binding nota}" />
-                        <Button Text="Aceptar"
-                                Clicked="OnAceptarCitaClicked"
-                                IsVisible="{Binding EsDestinatario}" />
-                        <Button Text="Denegar"
-                                Clicked="OnDenegarCitaClicked"
-                                IsVisible="{Binding EsDestinatario}" />
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView BackgroundColor="#ECF2F6" Padding="10">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid VerticalOptions="Center" Grid.Row="0">
+                <Label Text="NearMind"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#53518C"
+                   Margin="20"/>
+            </Grid>
+            <Label Grid.Row="1" Text="Solicitudes de cita"
+                   Margin="10"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="#53518C"/>
+            <CollectionView x:Name="CitasCollectionView" 
+                            Grid.Row="2"
+                            Margin="10"
+                            HorizontalOptions="Center">
+
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label Text="No hay chats disponibles" 
+                               FontSize="16" 
+                               TextColor="Gray" 
+                               HorizontalOptions="Center"/>
                     </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="20"
+                               Margin="10"
+                               BorderColor="Transparent">
+                            <Grid BackgroundColor="White">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0"
+                                       HorizontalOptions="Start"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       TextColor="#53518C"
+                                       Text="{Binding nombre}"/>
+                                <Label Grid.Row="1"
+                                       HorizontalOptions="Start"
+                                       Padding="0"
+                                       FontSize="14"
+                                       TextColor="#53518C"
+                                       Text="{Binding fechaHoraFormateada}" />
+                                <Label Grid.Row="2"
+                                       HorizontalOptions="Start"
+                                       Margin="0,15,0,15"
+                                       FontSize="14"
+                                       FontAttributes="Italic"
+                                       TextColor="#53518C"
+                                       Text="{Binding observaciones}" />
+                                <Grid Row="3" HorizontalOptions="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                <Button Text="Aceptar"
+                                        Margin="10"
+                                        Grid.Column="0"
+                                        BackgroundColor="#6F6CCB"
+                                        HeightRequest="40"
+                                        Clicked="OnAceptarCitaClicked"
+                                        IsVisible="{Binding EsDestinatario}" />
+                                <Button Text="Denegar"
+                                        Margin="10"
+                                        Grid.Column="1"
+                                        HeightRequest="40"
+                                        BackgroundColor="#ED8A6C"
+                                        Clicked="OnDenegarCitaClicked"
+                                        IsVisible="{Binding EsDestinatario}" />
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </ScrollView>
 </ContentPage>
 
 

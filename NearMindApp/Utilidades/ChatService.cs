@@ -96,7 +96,6 @@ namespace NearMindApp.Utilidades
 
         public async Task<List<Guid>> ObtenerConversacionesAsync(Guid usuarioId)
         {
-            // Obtener todas las claves de las conversaciones
             var conversaciones = await _firebaseClient
                 .Child("messages")
                 .OnceAsync<object>(); // Solo obtenemos las claves
@@ -108,14 +107,16 @@ namespace NearMindApp.Utilidades
                 var claves = conversacion.Key.Split('_'); // Dividimos la clave de la conversación
                 if (claves.Length == 2)
                 {
-                    var id1 = Guid.Parse(claves[0]);
-                    var id2 = Guid.Parse(claves[1]);
-
-                    // Identificamos al otro usuario en la conversación
-                    var otroUsuarioId = id1 == usuarioId ? id2 : id1;
-                    if (!idsConversaciones.Contains(otroUsuarioId))
+                    if (Guid.TryParse(claves[0], out Guid id1) && Guid.TryParse(claves[1], out Guid id2))
                     {
-                        idsConversaciones.Add(otroUsuarioId);
+                        if (id1 == usuarioId)
+                        {
+                            idsConversaciones.Add(id2);
+                        }
+                        else if (id2 == usuarioId)
+                        {
+                            idsConversaciones.Add(id1);
+                        }
                     }
                 }
             }

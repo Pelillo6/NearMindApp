@@ -165,11 +165,13 @@
             <Button x:Name="BtnEditar"
                     Text="Editar" 
                     Clicked="OnEditarClicked" 
+                    HeightRequest="40"
                     WidthRequest="100"
                     BackgroundColor="#ED8A6C"/>
             <Button x:Name="BtnLogout" 
                     Text="Cerrar sesión"
                     Clicked="OnLogoutClicked" 
+                    HeightRequest="40"
                     WidthRequest="150"
                     BackgroundColor="#6F6CCB"/>
 

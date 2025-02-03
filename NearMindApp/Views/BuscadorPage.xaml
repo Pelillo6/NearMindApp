@@ -8,9 +8,18 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Frame Grid.Row="0"
+            <Grid VerticalOptions="Center" Grid.Row="0">
+                <Label Text="NearMind"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#53518C"
+                       Margin="10"/>
+            </Grid>
+            <Frame Grid.Row="1"
                    CornerRadius="50"
                    Padding="0"
                    Margin="10"
@@ -25,7 +34,7 @@
                            BackgroundColor="White"/>
             </Frame>
 
-            <CollectionView Grid.Row="1" 
+            <CollectionView Grid.Row="2" 
                             x:Name="PsicologosListView" 
                             SelectionMode="Single" >
                 <CollectionView.ItemsLayout>

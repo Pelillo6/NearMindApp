@@ -15,10 +15,15 @@ namespace NearMindApp.Models
         [PrimaryKey]
         [JsonPropertyName("id")]
         public Guid id { get; set; }
-
+        [Required]
+        [JsonPropertyName("nombre")]
+        public string nombre { get; set; }
         [Required]
         [JsonPropertyName("fecha")]
         public DateTime fecha { get; set; }
+        [Required]
+        [JsonPropertyName("hora")]
+        public TimeSpan hora { get; set; }
 
         [Required]
         [JsonPropertyName("usuario1_id")]
@@ -28,11 +33,11 @@ namespace NearMindApp.Models
         [JsonPropertyName("usuario2_id")]
         public Guid usuario2_id { get; set; }
 
-        [JsonPropertyName("nota")]
-        public string nota { get; set; }
+        [JsonPropertyName("observaciones")]
+        public string observaciones { get; set; }
+        public string fechaHoraFormateada => $"{fecha:dd/MM/yyyy} {hora:hh\\:mm}";
         public Cita()
         {
-            id = Guid.NewGuid();
         }
         
     }

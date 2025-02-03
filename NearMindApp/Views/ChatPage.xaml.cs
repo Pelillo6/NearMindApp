@@ -45,6 +45,12 @@ public partial class ChatPage : ContentPage
             ImagenPerfil.Source = bucket.GetPublicUrl(_usuarioReceptor.imagen_perfil);
         }
         Nombre.Text = _usuarioReceptor.nombre;
+
+        if (Messages.Any())
+        {
+            MessagesCollectionView.ScrollTo(Messages.Last(), position: ScrollToPosition.End, animate: false);
+        }
+
     }
 
     private async void CargarMensajes()
@@ -57,10 +63,16 @@ public partial class ChatPage : ContentPage
             var usuario = await UsuarioService.Instance.ObtenerUsuarioPorId(mensaje.emisorId);
             mensaje.NombreEmisor = usuario?.nombre ?? "Desconocido";
             mensaje.EsEnviado = usuario.id == _usuarioEmisor.id;
-            Messages.Add(mensaje);
+            
         }
 
+        Messages = new ObservableCollection<Message>(mensajes);
 
+        if (Messages.Any())
+        {
+            MessagesCollectionView.ItemsSource = Messages;
+            MessagesCollectionView.ScrollTo(Messages.Last(), position: ScrollToPosition.End, animate: false);
+        }
         await _chatService.SubscribeToMessagesAsync(_usuarioEmisor.id, _idUsuario, Messages);
     }
 
@@ -72,6 +84,7 @@ public partial class ChatPage : ContentPage
             await _chatService.SendMessageAsync(_usuarioEmisor.id, _idUsuario, texto);
             MessageEntry.Text = string.Empty;
         }
+        CargarMensajes();
     }
     
 
