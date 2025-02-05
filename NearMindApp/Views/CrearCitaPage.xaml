@@ -17,8 +17,9 @@
 
 
             <Label Text="Descripción"
-                   FontSize="20"
+                   FontSize="14"
                    FontAttributes="Bold"
+                   HorizontalOptions="Start"
                    TextColor="#53518C"/>
 
             <Frame BorderColor="#6F6CCB" 
@@ -46,8 +47,10 @@
                 <DatePicker x:Name="FecCita"
                             Format="dd/MM/yyyy" />
             </Frame>
-            
+
             <Label Text="Hora"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
                    TextColor="#53518C"
                    Margin="5,0,0,-25"  
                    FontSize="14"/>
