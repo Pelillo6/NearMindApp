@@ -34,27 +34,19 @@ namespace NearMindApp.Models
         [JsonPropertyName("password")]
         public string password { get; set; }
 
-        [JsonPropertyName("historial")]
-        public List<Cita> historial { get; set; }
-
         [JsonPropertyName("rol")]
         public string rol { get; set; }
 
         [JsonPropertyName("especialidad")]
         public string especialidad { get; set; }
 
-        [JsonPropertyName("validado")]
-        public bool validado { get; set; }
-
         [JsonPropertyName("precio")]
         public double? precio { get; set; }
 
-        [JsonPropertyName("ubicacion")]
-        public string ubicacion { get; set; }
+        [JsonPropertyName("ciudad")]
+        public string ciudad { get; set; }
         [JsonPropertyName("direccion")]
         public string direccion { get; set; }
-        [JsonPropertyName("valoracion_media")]
-        public double? valoracion_media { get; set; }
         [JsonPropertyName("descripcion")]
         public string descripcion { get; set; }
         [JsonPropertyName("imagen_perfil")]
@@ -62,7 +54,6 @@ namespace NearMindApp.Models
         public Usuario()
         {
             id = Guid.NewGuid();
-            historial = new List<Cita>();
         }
         public bool isPsicologo() {
             return rol == "Psicologo";

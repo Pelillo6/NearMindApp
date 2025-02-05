@@ -41,7 +41,7 @@ public partial class RegistroPacientePage : ContentPage
             fecha_nacimiento = FecNacimiento.Date,
             telefono = Telefono.Text,
             rol = "Paciente",
-            ubicacion = Ubicacion.Text
+            ciudad = Ubicacion.Text
             };
 
             var resultadoPaciente = await _supabaseService.GetClient().From<Usuario>().Insert(paciente);

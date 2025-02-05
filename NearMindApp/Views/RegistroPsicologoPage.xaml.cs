@@ -42,7 +42,6 @@ public partial class RegistroPsicologoPage : ContentPage
         datosPsicologo.precio = parsedPrecio;
         datosPsicologo.descripcion = Descripcion.Text;
         datosPsicologo.especialidad= Especialidad.Text;
-        datosPsicologo.validado = true;
 
         var resultadoPsicologo = await _supabaseService.GetClient().From<Usuario>().Insert(datosPsicologo);
         if (resultadoPsicologo.Models?.Any() == true)

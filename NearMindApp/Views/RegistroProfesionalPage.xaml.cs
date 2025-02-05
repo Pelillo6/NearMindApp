@@ -41,7 +41,7 @@ public partial class RegistroProfesionalPage : ContentPage
             fecha_nacimiento = FecNacimiento.Date,
             telefono = Telefono.Text,
             rol = "Psicologo",
-            ubicacion = Ubicacion.Text,
+            ciudad = Ubicacion.Text,
             direccion = Direccion.Text
         };
 

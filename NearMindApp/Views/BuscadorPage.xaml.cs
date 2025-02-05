@@ -48,7 +48,7 @@ public partial class BuscadorPage : ContentPage
                     UsuarioId = psicologo.id,
                     NombreUsuario = psicologo.nombre.ToString(),
                     ImagenPerfil = imagenPerfilUrl,
-                    Ciudad = psicologo.ubicacion,
+                    Ciudad = psicologo.ciudad,
                     Especialidad = psicologo.especialidad,
                     PrecioHora = precioFormated
                 });

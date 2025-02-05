@@ -47,7 +47,7 @@ public partial class PerfilPage : ContentPage
 
             Nombre.Text = _usuarioActual.nombre;
             Telefono.Text = _usuarioActual.telefono;
-            Ubicacion.Text = _usuarioActual.ubicacion;
+            Ubicacion.Text = _usuarioActual.ciudad;
             Correo.Text = _usuarioActual.email;
             Contra.Text = _usuarioActual.password;
             Descripcion.Text = _usuarioActual.descripcion;
@@ -147,7 +147,7 @@ public partial class PerfilPage : ContentPage
             // Actualizar los datos en la base de datos
             _usuarioActual.nombre = Nombre.Text;
             _usuarioActual.telefono = Telefono.Text;
-            _usuarioActual.ubicacion = Ubicacion.Text;
+            _usuarioActual.ciudad = Ubicacion.Text;
             _usuarioActual.email = Correo.Text;
             _usuarioActual.password = Contra.Text;
             _usuarioActual.descripcion = Descripcion.Text;
